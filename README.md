@@ -124,7 +124,7 @@ COM7023_Mathematics_for_Data_Science/
 
 ```bash
 python -m venv venv
-
+```
 # Windows
 venv\Scripts\activate
 
@@ -135,7 +135,7 @@ source venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
-
+```
 ### Step 4: Add Datasets
 Place the following files in the datasets/ directory:
 
@@ -149,7 +149,7 @@ Navigate to any topic folder and run the Python scripts:
 cd 01_data_loading_and_exploration
 python data_loading_marking_matrix.py
 python data_loading_triplet_births.py
-
+```
 #### Dependencies
 This project uses only the following libraries as specified in the module requirements:
 
