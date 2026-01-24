@@ -153,8 +153,11 @@ python data_loading_triplet_births.py
 #### Dependencies
 This project uses only the following libraries as specified in the module requirements:
 
-**pandas:** Data manipulation and analysis /N
-**numpy:** Numerical computing /N
-**matplotlib:** Data visualisation /N
-**seaborn:** Statistical visualisation /N
+**pandas:** Data manipulation and analysis
+
+**numpy:** Numerical computing 
+
+**matplotlib:** Data visualisation
+
+**seaborn:** Statistical visualisation
 
