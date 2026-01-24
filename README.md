@@ -66,5 +66,58 @@ Ensure Python 3.8 or higher is installed on your system.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Farid89-data/COM7023_Maths_4_Data_Science.git
-cd COM7023_Maths_4_Data_Science
+git clone https://github.com/Farid89-data/COM7023_Mathematics_for_Data_Science.git
+cd COM7023_Mathematics_for_Data_Science
+
+COM7023_Mathematics_for_Data_Science/
+│
+├── README.md                                    # Main documentation
+├── requirements.txt                             # Python dependencies
+├── LICENSE                                      # MIT License
+│
+├── datasets/
+│   ├── COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv
+│   └── FRA_InputData_25.11.2024.xlsx
+│
+├── 01_data_loading_and_exploration/
+│   ├── data_loading_marking_matrix.py
+│   ├── data_loading_triplet_births.py
+│   └── README.md
+│
+├── 02_descriptive_statistics/
+│   ├── descriptive_statistics_marking_matrix.py
+│   ├── descriptive_statistics_triplet_births.py
+│   └── README.md
+│
+├── 03_normalisation_and_standardisation/
+│   ├── normalisation_marking_matrix.py
+│   ├── normalisation_triplet_births.py
+│   └── README.md
+│
+├── 04_probability_distributions/
+│   ├── probability_distributions_marking_matrix.py
+│   ├── poisson_distribution_triplet_births.py
+│   └── README.md
+│
+├── 05_linear_algebra/
+│   ├── linear_algebra_marking_matrix.py
+│   ├── linear_algebra_triplet_births.py
+│   └── README.md
+│
+├── 06_calculus_and_optimisation/
+│   ├── calculus_marking_matrix.py
+│   ├── calculus_triplet_births.py
+│   └── README.md
+│
+├── 07_correlation_and_regression/
+│   ├── correlation_regression_marking_matrix.py
+│   ├── correlation_regression_triplet_births.py
+│   └── README.md
+│
+├── 08_hypothesis_testing/
+│   ├── hypothesis_testing_marking_matrix.py
+│   ├── hypothesis_testing_triplet_births.py
+│   └── README.md
+│
+└── outputs/
+    └── figures/
