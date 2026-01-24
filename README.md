@@ -119,7 +119,7 @@ COM7023_Mathematics_for_Data_Science/
 │
 └── outputs/
     └── figures/
-
+```
 ### Step 2: Create Virtual Environment
 
 ```bash
