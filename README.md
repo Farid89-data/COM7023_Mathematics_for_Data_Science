@@ -124,13 +124,14 @@ COM7023_Mathematics_for_Data_Science/
 
 ```bash
 python -m venv venv
-```
+x
 # Windows
 venv\Scripts\activate
 
 # macOS/Linux
 source venv/bin/activate
 
+```
 ### Step 3: Install Dependencies
 
 ```bash
