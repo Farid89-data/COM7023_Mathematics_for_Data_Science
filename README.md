@@ -119,3 +119,42 @@ COM7023_Mathematics_for_Data_Science/
 │
 └── outputs/
     └── figures/
+
+### Step 2: Create Virtual Environment
+
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS/Linux
+source venv/bin/activate
+
+### Step 3: Install Dependencies
+
+```bash
+pip install -r requirements.txt
+
+### Step 4: Add Datasets
+Place the following files in the datasets/ directory:
+
+COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv
+FRA_InputData_25.11.2024.xlsx (download from twinbirths.org)
+
+### Step 5: Run Scripts
+Navigate to any topic folder and run the Python scripts:
+
+```bash
+cd 01_data_loading_and_exploration
+python data_loading_marking_matrix.py
+python data_loading_triplet_births.py
+
+#### Dependencies
+This project uses only the following libraries as specified in the module requirements:
+
+*pandas:* Data manipulation and analysis
+*numpy:* Numerical computing
+*matplotlib:* Data visualisation
+*seaborn:* Statistical visualisation
+
