@@ -56,7 +56,7 @@ $$\mathbf{A}\mathbf{v} = \lambda\mathbf{v}$$
 
 ## References
 
-Arden University (20264) *COM7023 Mathematics for Data Science Marking Matrix*. Arden University.
+Arden University (2026) *COM7023 Mathematics for Data Science Marking Matrix*. Arden University.
 
 Human Multiple Births Database (2024) *FRA_InputData_25.11.2024.xlsx*. Available at: https://www.twinbirths.org/en/data-metadata/ (Accessed: 25 November 2024).
 
