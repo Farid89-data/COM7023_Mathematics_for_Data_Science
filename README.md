@@ -137,10 +137,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 ### Step 4: Add Datasets
-Place the following files in the datasets/ directory:
+Place the following files in the `datasets/` directory:
 
-COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv
-FRA_InputData_25.11.2024.xlsx (download from twinbirths.org)
+`COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv`
+`FRA_InputData_25.11.2024.xlsx` (download from twinbirths.org)
 
 ### Step 5: Run Scripts
 Navigate to any topic folder and run the Python scripts:
@@ -153,8 +153,8 @@ python data_loading_triplet_births.py
 #### Dependencies
 This project uses only the following libraries as specified in the module requirements:
 
-*pandas:* Data manipulation and analysis
-*numpy:* Numerical computing
-*matplotlib:* Data visualisation
-*seaborn:* Statistical visualisation
+**pandas:** Data manipulation and analysis
+**numpy:** Numerical computing
+**matplotlib:** Data visualisation
+**seaborn:** Statistical visualisation
 
