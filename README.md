@@ -1,6 +1,7 @@
-# COM7023 Mathematics for Data Science
 
 <div align="center">
+# COM7023 Mathematics for Data Science
+
 
 Python
 Pandas
