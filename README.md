@@ -291,3 +291,69 @@ Demographic information about multiple births (twins, triplets) across multiple 
 **Data Source:**
 > Human Multiple Births Database (2024). FRA_InputData_25.11.2024.xlsx. Available at: https://www.twinbirths.org/en/data-metadata/ (Accessed: 25 November 2024).
 
+## 🔧 Configuration
+**Adding Datasets**
+Place the following files in the `datasets/` directory:
+```bash
+datasets/
+├── COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv
+└── FRA_InputData_25.11.2024.xlsx
+```
+
+Download the HMBD data from twinbirths.org.
+
+## 🧪 Testing
+Run tests to verify all scripts execute correctly:
+```bash
+# Test individual script
+python -m py_compile 01_data_loading_and_exploration/data_loading_marking_matrix.py
+
+# Verify no syntax errors in all Python files
+find . -name "*.py" -exec python -m py_compile {} \;
+```
+## 📖 Documentation
+Each topic folder contains its own `README.md` with:
+
+* Detailed explanation of mathematical concepts
+* Code documentation and usage examples
+* Expected outputs and interpretations
+* References to relevant academic resources
+  
+## 🤝 Contributing
+This is an academic portfolio project. However, suggestions and feedback are welcome:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Commit changes (`git commit -am 'Add improvement'`)
+4. Push to branch (`git push origin feature/improvement`)
+5. Open a Pull Request
+
+## 📄 License
+This project is licensed under the **MIT License** - see the LICENSE file for details.
+
+```
+MIT License
+
+Copyright (c) 2026 Farid Negahbnai
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software...
+```
+
+## 👤 Author
+**Farid Negahbnai**
+   * 🎓 Student ID: 24154844
+   * 🏫 Arden University
+   * 📧 Module: COM7023 Mathematics for Data Science
+   * 👨‍🏫 Tutor: Ali Vaisifard
+
+<div align="center">
+
+© 2026 Farid Negahbnai | Arden University
+
+Made with ❤️ for COM7023 Mathematics for Data Science
+
+</div>
