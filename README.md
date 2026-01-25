@@ -240,14 +240,15 @@ Each script generates:
 
 📊 Mathematical Topics
 #	Topic	Description	Key Concepts
-01	Data Loading & Exploration	Initial data analysis and structure understanding	pandas.read_csv(), DataFrame.info(), DataFrame.describe()
-02	Descriptive Statistics	Measures of central tendency and dispersion	Mean, median, mode, variance, standard deviation
-03	Normalisation & Standardisation	Data transformation techniques	Min-max scaling, Z-score normalisation
-04	Probability Distributions	Discrete and continuous probability models	Binomial, Poisson, Normal distributions
-05	Linear Algebra	Matrix operations and vector spaces	Matrix multiplication, determinants, eigenvalues
-06	Calculus & Optimisation	Derivatives and optimisation problems	Gradient descent, critical points, integrals
-07	Correlation & Regression	Statistical relationships and prediction	Pearson correlation, linear regression, R²
-08	Hypothesis Testing	Statistical inference and decision making	t-tests, p-values, confidence intervals
+01.	Data Loading & Exploration	Initial data analysis and structure understanding	pandas.read_csv(), DataFrame.info(), DataFrame.describe()
+02.	Descriptive Statistics	Measures of central tendency and dispersion	Mean, median, mode, variance, standard deviation
+03.	Normalisation & Standardisation	Data transformation techniques	Min-max scaling, Z-score normalisation
+04.	Probability Distributions	Discrete and continuous probability models	Binomial, Poisson, Normal distributions
+05.	Linear Algebra	Matrix operations and vector spaces	Matrix multiplication, determinants, eigenvalues
+06.	Calculus & Optimisation	Derivatives and optimisation problems	Gradient descent, critical points, integrals
+07.	Correlation & Regression	Statistical relationships and prediction	Pearson correlation, linear regression, R²
+08.	Hypothesis Testing	Statistical inference and decision making	t-tests, p-values, confidence intervals
+
 ## 📈 Datasets
 **Dataset 1: Course Marking Matrix**
 Assessment criteria for the COM7023 module across different grade boundaries. Used for text processing, categorical analysis, and matrix operations.
