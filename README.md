@@ -1,5 +1,5 @@
-<div align="center">
-COM7023 Mathematics for Data Science**
+<div align="center", bold>
+COM7023 Mathematics for Data Science
 </div>
 
 <div align="center">
