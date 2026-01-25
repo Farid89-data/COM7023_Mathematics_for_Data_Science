@@ -1,0 +1,162 @@
+======================================================================
+DESCRIPTIVE STATISTICS
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+Dataset shape: (4, 10)
+
+======================================================================
+STEP 2: FEATURE ENGINEERING
+======================================================================
+
+--- Creating Numerical Features from Text ---
+
+Created features: Word_Count, Character_Count, Sentence_Count
+Total observations: 36
+
+======================================================================
+STEP 3: MEASURES OF CENTRAL TENDENCY
+======================================================================
+
+--- Mathematical Formulas ---
+
+  Arithmetic Mean:
+  x̄ = (1/n) × Σxᵢ
+
+  Median: Middle value when data is ordered
+
+  Mode: Most frequently occurring value
+
+--- Word Count Statistics ---
+
+  Step-by-step Mean Calculation:
+  n = 36
+  Σxᵢ = 1373
+  x̄ = 1373 / 36 = 38.14
+
+  Median = 32.00
+  Mode = 30
+
+--- Mean Word Count by Grade Band ---
+  90- 100: 16.2 words
+  80 - 90: 42.5 words
+  70 – 79: 41.2 words
+  60 - 69: 46.0 words
+  50 – 59: 40.8 words
+  40 – 49: 40.2 words
+  30 – 39: 40.5 words
+  20 - 29: 40.2 words
+  0 - 19: 35.5 words
+
+======================================================================
+STEP 4: MEASURES OF DISPERSION
+======================================================================
+
+--- Mathematical Formulas ---
+
+  Sample Variance:
+  s² = (1/(n-1)) × Σ(xᵢ - x̄)²
+
+  Standard Deviation:
+  s = √s²
+
+  Range:
+  Range = xₘₐₓ - xₘᵢₙ
+
+--- Word Count Dispersion ---
+
+  Step-by-step Variance Calculation:
+  x̄ = 38.14
+  Σ(xᵢ - x̄)² = 9072.31
+  s² = 9072.31 / 35 = 259.21
+  s = √259.21 = 16.10
+
+  Range = 65 - 12 = 53
+
+  Q1 (25th percentile) = 24.00
+  Q3 (75th percentile) = 54.00
+  IQR = Q3 - Q1 = 30.00
+
+  Coefficient of Variation = (s/x̄) × 100 = 42.21%
+
+======================================================================
+STEP 5: SHAPE MEASURES
+======================================================================
+
+--- Skewness ---
+  Formula: γ₁ = (1/n) × Σ((xᵢ - x̄)/s)³
+
+  Skewness = 0.1131
+  Interpretation: Positive skew (right-tailed distribution)
+
+--- Kurtosis ---
+  Formula: γ₂ = (1/n) × Σ((xᵢ - x̄)/s)⁴ - 3
+
+  Excess Kurtosis = -1.5290
+  Interpretation: Platykurtic (lighter tails than normal)
+
+======================================================================
+STEP 6: COMPLETE STATISTICS SUMMARY
+======================================================================
+
+
+Statistic  Word_Count  Character_Count
+    Count   36.000000        36.000000
+     Mean   38.138889       303.000000
+   Median   32.000000       265.500000
+     Mode   30.000000       163.000000
+ Variance  259.208730     14864.457143
+  Std Dev   16.099961       121.919880
+      Min   12.000000       115.000000
+      Max   65.000000       504.000000
+    Range   53.000000       389.000000
+       Q1   24.000000       188.500000
+       Q3   54.000000       407.750000
+      IQR   30.000000       219.250000
+ Skewness    0.113093         0.000000
+ Kurtosis   -1.528994        -3.000000
+   CV (%)   42.214026        40.237584
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+/home/codespace/COM7023_Mathematics_for_Data_Science/02_descriptive_statistics/descriptive_statistics_marking_matrix.py:332: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_stats_sorted, x='Grade_Band', y='Word_Count', ax=ax2,
+
+Visualisation saved: descriptive_statistics_marking_matrix.png
+
+======================================================================
+STEP 8: KEY FINDINGS
+======================================================================
+
+--- Key Observations ---
+  1. Average description length: 38.1 words
+  2. Descriptions vary from 12 to 65 words
+  3. Higher grades tend to have fewer detailed descriptions
+  4. Distribution is positively skewed
+  5. Variability (CV = 42.2%) indicates moderate dispersion
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+======================================================================
+END OF DESCRIPTIVE STATISTICS ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

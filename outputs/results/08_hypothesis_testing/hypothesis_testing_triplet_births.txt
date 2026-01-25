@@ -1,0 +1,256 @@
+======================================================================
+HYPOTHESIS TESTING
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Analysis Period: 1970 - 2020
+Number of Observations: n = 51 years
+
+--- Descriptive Statistics ---
+    Mean Triplets: 187.41
+    Std Dev: 62.94
+    Min: 74 (Year 1971)
+    Max: 334 (Year 1989)
+
+======================================================================
+STEP 2: TESTING FOR TREND
+======================================================================
+
+--- Hypothesis: Is There a Linear Trend in Triplet Births? ---
+
+  H₀: β₁ = 0 (no linear trend)
+  H₁: β₁ ≠ 0 (linear trend exists)
+
+--- Regression Results ---
+  Slope (β̂₁) = 1.825068
+  Standard Error = 0.545752
+  t-statistic = 3.3441
+  p-value = 1.588862e-03
+
+--- Decision (α = 0.05) ---
+  p-value (1.588862e-03) < α (0.05)
+  Reject H₀: There is a significant linear trend in triplet births
+  Direction: Increasing trend (1.83 more triplets per year)
+
+======================================================================
+STEP 3: MANN-KENDALL TREND TEST
+======================================================================
+
+--- Non-Parametric Trend Test ---
+
+  The Mann-Kendall test is robust to non-normal data and outliers
+  It tests for monotonic trends without assuming linearity
+
+--- Mann-Kendall Test Results ---
+  S statistic = 282
+  Z statistic = 2.2830
+  p-value = 0.022429
+  Detected Trend: increasing
+
+--- Interpretation ---
+  Significant increasing monotonic trend detected (p < 0.05)
+
+======================================================================
+STEP 4: COMPARING TIME PERIODS
+======================================================================
+
+--- Testing: Did Triplet Births Change Between Decades? ---
+
+--- Decade Summary Statistics ---
+    Decade     n        Mean     Std Dev       Min       Max
+  ------------------------------------------------------------
+     1970s    10       97.90       22.65        74       146
+     1980s    10      187.10       66.51       124       334
+     1990s    10      255.50       37.46       209       317
+     2000s    10      211.40       18.34       177       233
+     2010s    10      189.00       21.72       156       231
+
+--------------------------------------------------
+4.1 ONE-WAY ANOVA
+--------------------------------------------------
+
+  H₀: μ₁ = μ₂ = μ₃ = μ₄ = μ₅ (all decade means are equal)
+  H₁: At least one decade mean differs
+
+  F-statistic = 23.1234
+  p-value = 1.966566e-10
+
+  Decision: Reject H₀
+  At least one decade has significantly different mean triplet births
+
+--- Post-hoc Pairwise Comparisons (Bonferroni corrected) ---
+
+  Number of comparisons: 10
+  Bonferroni-corrected α: 0.0050
+
+            Comparison      t-stat       p-value   Significant
+  ------------------------------------------------------------
+        1970s vs 1980s     -4.0146      0.000813           Yes
+        1970s vs 1990s    -11.3845      0.000000           Yes
+        1970s vs 2000s    -12.3162      0.000000           Yes
+        1970s vs 2010s     -9.1802      0.000000           Yes
+        1980s vs 1990s     -2.8335      0.011016            No
+        1980s vs 2000s     -1.1138      0.280029            No
+        1980s vs 2010s     -0.0859      0.932517            No
+        1990s vs 2000s      3.3435      0.003616           Yes
+        1990s vs 2010s      4.8563      0.000127           Yes
+        2000s vs 2010s      2.4919      0.022687            No
+
+======================================================================
+STEP 5: STRUCTURAL BREAK TEST
+======================================================================
+
+--- Testing for Structural Change in the Time Series ---
+
+  A structural break indicates a significant shift in the data pattern
+  We test if the regression relationship changed at some point
+
+  Testing for break at year 1989 (peak triplet year)
+  H₀: No structural break at year 1989
+  H₁: Structural break exists at year 1989
+
+--- Chow Test Results ---
+  F-statistic = 141.2913
+  p-value = 0.000000
+
+  Decision: Reject H₀
+  Evidence of structural break around 1989
+
+======================================================================
+STEP 6: NORMALITY TESTING
+======================================================================
+
+--- Testing if Triplet Data Follows Normal Distribution ---
+
+  H₀: Data is normally distributed
+  H₁: Data is not normally distributed
+
+--------------------------------------------------
+6.1 SHAPIRO-WILK TEST
+--------------------------------------------------
+  W-statistic = 0.975127
+  p-value = 0.356388
+
+--------------------------------------------------
+6.2 D'AGOSTINO-PEARSON TEST
+--------------------------------------------------
+  K²-statistic = 0.110858
+  p-value = 0.946079
+
+--------------------------------------------------
+6.3 ANDERSON-DARLING TEST
+--------------------------------------------------
+  Statistic = 0.333023
+  Critical Values:
+     15.0%: 0.5520 ✓
+     10.0%: 0.6210 ✓
+      5.0%: 0.7400 ✓
+      2.5%: 0.8600 ✓
+      1.0%: 1.0190 ✓
+
+--- Summary ---
+  Conclusion: Data appears normally distributed
+
+======================================================================
+STEP 7: BOOTSTRAP HYPOTHESIS TEST
+======================================================================
+
+--- Bootstrap Method ---
+
+  Bootstrap resampling provides distribution-free inference
+  by repeatedly sampling with replacement from the data
+
+  Comparing 1970s vs 2010s:
+  Mean 1970s: 97.90
+  Mean 2010s: 185.36
+  Observed Difference: 87.46
+
+--- Bootstrap Results (10,000 iterations) ---
+  Bootstrap Mean Difference: -0.1023
+  Bootstrap Std Dev: 21.8641
+  p-value = 0.000000
+  95% CI for difference: [-42.93, 42.98]
+
+--- Decision ---
+  Reject H₀: Significant difference between 1970s and 2010s
+
+======================================================================
+STEP 8: TESTING FOR AUTOCORRELATION
+======================================================================
+
+--- Ljung-Box Test for Autocorrelation ---
+
+  H₀: No autocorrelation in the time series
+  H₁: Autocorrelation exists
+
+  Q-statistic = 151.3012
+  p-value = 0.000000
+
+  Autocorrelation Coefficients:
+    Lag    ACF
+    ---------------
+      1     0.8886
+      2     0.7741
+      3     0.6734
+      4     0.5725
+      5     0.4674
+
+  Decision: Reject H₀
+  Significant autocorrelation detected in the time series
+
+======================================================================
+STEP 9: VISUALISATION
+======================================================================
+
+Visualisation saved: hypothesis_testing_triplet_births.png
+
+======================================================================
+STEP 10: SUMMARY OF ALL HYPOTHESIS TESTS
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                    HYPOTHESIS TESTING SUMMARY                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  TEST                          STATISTIC      P-VALUE    DECISION   │
+├─────────────────────────────────────────────────────────────────────┤
+│  Linear Trend (t-test)         t =   3.344     1.59e-03    Reject │
+│  Mann-Kendall Trend            Z =   2.283     0.022429    Reject │
+│  ANOVA (Decades)               F =  23.123     1.97e-10    Reject │
+│  Chow Break Test               F = 141.291     0.000000    Reject │
+│  Shapiro-Wilk Normality        W =  0.9751     0.356388      Fail │
+│  Bootstrap (1970s vs 2010s)    Δ =    87.5     0.000000    Reject │
+│  Ljung-Box Autocorrelation     Q =  151.30     0.000000    Reject │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Key Findings ---
+  1. Significant linear trend detected (slope = 1.83)
+  2. Significant differences exist between decades
+  3. Structural break detected around 1989
+  5. Significant autocorrelation in time series
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+--- Further Reading ---
+  Wasserman, L. (2004) All of Statistics. Springer.
+
+======================================================================
+END OF HYPOTHESIS TESTING ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

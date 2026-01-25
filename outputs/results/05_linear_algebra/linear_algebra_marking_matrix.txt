@@ -1,0 +1,460 @@
+======================================================================
+LINEAR ALGEBRA
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Feature matrix shape: (4, 9)
+  - Rows (Learning Outcomes): 4
+  - Columns (Grade Bands): 9
+
+======================================================================
+STEP 2: VECTORS - FUNDAMENTAL CONCEPTS
+======================================================================
+
+--- What is a Vector? ---
+
+  A vector is an ordered list of numbers, representing a point
+  or direction in n-dimensional space.
+
+       ┌ v₁ ┐
+  v =  │ v₂ │   ∈ ℝⁿ
+       │ ⋮  │
+       └ vₙ ┘
+
+--- Vectors from Dataset ---
+
+  Vector for LO1 (word counts across grades):
+  v₁ = [16 28 24 29 22 18 18 23 24]
+
+  Vector for LO2 (word counts across grades):
+  v₂ = [18 50 51 56 51 54 54 51 45]
+
+  Dimension of vectors: n = 9
+
+======================================================================
+STEP 3: VECTOR OPERATIONS
+======================================================================
+
+--------------------------------------------------
+3.1 VECTOR ADDITION
+--------------------------------------------------
+
+  Formula: u + v = [u₁ + v₁, u₂ + v₂, ..., uₙ + vₙ]
+
+  v₁ = [16 28 24 29 22 18 18 23 24]
+  v₂ = [18 50 51 56 51 54 54 51 45]
+
+  v₁ + v₂ = [34 78 75 85 73 72 72 74 69]
+
+  Step-by-step:
+    Position 1: 16 + 18 = 34
+    Position 2: 28 + 50 = 78
+    Position 3: 24 + 51 = 75
+    ...
+
+--------------------------------------------------
+3.2 SCALAR MULTIPLICATION
+--------------------------------------------------
+
+  Formula: c × v = [c×v₁, c×v₂, ..., c×vₙ]
+
+  c = 2
+  v₁ = [16 28 24 29 22 18 18 23 24]
+
+  c × v₁ = 2 × v₁ = [32 56 48 58 44 36 36 46 48]
+
+--------------------------------------------------
+3.3 DOT PRODUCT (INNER PRODUCT)
+--------------------------------------------------
+
+  Formula: u · v = Σᵢ uᵢ × vᵢ = u₁v₁ + u₂v₂ + ... + uₙvₙ
+
+  The dot product measures similarity between vectors.
+
+  v₁ = [16 28 24 29 22 18 18 23 24]
+  v₂ = [18 50 51 56 51 54 54 51 45]
+
+  Step-by-step calculation:
+  v₁ · v₂ = 16×18 + 28×50 + 24×51 + 29×56 + 22×51 + 18×54 + 18×54 + 23×51 + 24×45
+         = 288 + 1400 + 1224 + 1624 + 1122 + 972 + 972 + 1173 + 1080
+         = 9855
+
+--------------------------------------------------
+3.4 VECTOR MAGNITUDE (NORM)
+--------------------------------------------------
+
+  Formula: ||v|| = √(Σᵢ vᵢ²) = √(v₁² + v₂² + ... + vₙ²)
+
+  The Euclidean norm measures the 'length' of a vector.
+
+  ||v₁|| = √(16² + 28² + 24² + ...)
+        = √(4694)
+        = 68.5128
+
+  ||v₂|| = 147.0374
+
+--------------------------------------------------
+3.5 COSINE SIMILARITY
+--------------------------------------------------
+
+  Formula: cos(θ) = (u · v) / (||u|| × ||v||)
+
+  Measures the angle between two vectors:
+  - cos(θ) = 1: vectors point same direction
+  - cos(θ) = 0: vectors are orthogonal
+  - cos(θ) = -1: vectors point opposite directions
+
+  cos(θ) = (v₁ · v₂) / (||v₁|| × ||v₂||)
+         = 9855 / (68.5128 × 147.0374)
+         = 9855 / 10073.9406
+         = 0.978267
+
+  θ = arccos(0.978267)
+    = 0.2089 radians
+    = 11.97°
+
+  Interpretation: LO1 and LO2 are highly similar
+
+======================================================================
+STEP 4: MATRICES - FUNDAMENTAL CONCEPTS
+======================================================================
+
+--- What is a Matrix? ---
+
+  A matrix is a rectangular array of numbers with m rows and n columns:
+
+       ┌ a₁₁  a₁₂  ...  a₁ₙ ┐
+  A =  │ a₂₁  a₂₂  ...  a₂ₙ │   ∈ ℝᵐˣⁿ
+       │  ⋮    ⋮   ⋱    ⋮  │
+       └ aₘ₁  aₘ₂  ...  aₘₙ ┘
+
+--- Feature Matrix A (Word Counts) ---
+
+  Dimensions: 4 × 9 (m × n)
+
+  A = 
+      LO1: [16 28 24 29 22 18 18 23 24]
+      LO2: [18 50 51 56 51 54 54 51 45]
+      LO3: [12 61 58 65 58 59 60 57 43]
+      LO4: [19 31 32 34 32 30 30 30 30]
+
+  Notation:
+  - A ∈ ℝ^(4×9)
+  - Element a_ij represents word count for LO_i at grade band j
+  - Example: a₁₂ = A[0,1] = 28 (LO1, grade band 80-90)
+
+======================================================================
+STEP 5: MATRIX OPERATIONS
+======================================================================
+
+--------------------------------------------------
+5.1 MATRIX TRANSPOSE
+--------------------------------------------------
+
+  Definition: (Aᵀ)ᵢⱼ = aⱼᵢ
+
+  Transpose swaps rows and columns:
+  - If A is m × n, then Aᵀ is n × m
+
+  Original A (4×9):
+    [16 28 24 29 22 18 18 23 24]
+    [18 50 51 56 51 54 54 51 45]
+    [12 61 58 65 58 59 60 57 43]
+    [19 31 32 34 32 30 30 30 30]
+
+  Transpose Aᵀ (9×4):
+    [16 18 12 19]
+    [28 50 61 31]
+    [24 51 58 32]
+    [29 56 65 34]
+    [22 51 58 32]
+    [18 54 59 30]
+    [18 54 60 30]
+    [23 51 57 30]
+    [24 45 43 30]
+
+  Properties of Transpose:
+  - (Aᵀ)ᵀ = A
+  - (A + B)ᵀ = Aᵀ + Bᵀ
+  - (AB)ᵀ = BᵀAᵀ
+  - (cA)ᵀ = cAᵀ
+
+--------------------------------------------------
+5.2 MATRIX-VECTOR MULTIPLICATION
+--------------------------------------------------
+
+  Formula: y = Ax where A ∈ ℝᵐˣⁿ, x ∈ ℝⁿ, y ∈ ℝᵐ
+
+  yᵢ = Σⱼ aᵢⱼxⱼ (dot product of row i with vector x)
+
+  Weight vector x (normalized grade midpoints):
+  x = [0.1953 0.1747 0.1531 0.1326 0.112  0.0915 0.0709 0.0504 0.0195]
+
+  Result y = Ax:
+    y1 (LO1 weighted score) = 22.5509
+    y2 (LO2 weighted score) = 45.4142
+    y3 (LO3 weighted score) = 50.3597
+    y4 (LO4 weighted score) = 29.0874
+
+--------------------------------------------------
+5.3 MATRIX MULTIPLICATION
+--------------------------------------------------
+
+  Formula: C = AB where A ∈ ℝᵐˣⁿ, B ∈ ℝⁿˣᵖ, C ∈ ℝᵐˣᵖ
+
+  cᵢⱼ = Σₖ aᵢₖbₖⱼ
+
+  Requirement: Number of columns in A = Number of rows in B
+
+  Computing AᵀA (Gram Matrix):
+  A ∈ ℝ^(4, 9), Aᵀ ∈ ℝ^(9, 4)
+  AᵀA ∈ ℝ^(9, 9)
+
+  AᵀA = 
+    [1085 2669 2606 2898 2574]
+    [2669 7966 7752 8631 7696]
+    [2606 7752 7565 8410 7517]
+    [2898 8631 8410 9358 8352]
+    [2574 7696 7517 8352 7473]
+    ...
+
+  Properties of AᵀA:
+  - Always symmetric: (AᵀA)ᵀ = AᵀA
+  - Always positive semi-definite
+  - Diagonal elements are sum of squared column values
+
+  Computing AAᵀ:
+  AAᵀ ∈ ℝ^(4, 4)
+
+  AAᵀ = 
+    [ 4694  9855 10938  6120]
+    [ 9855 21620 24090 13180]
+    [10938 24090 26997 14611]
+    [ 6120 13180 14611  8126]
+
+======================================================================
+STEP 6: SQUARE MATRIX OPERATIONS
+======================================================================
+
+  Using S = AAᵀ as our square matrix (4×4)
+
+--------------------------------------------------
+6.1 TRACE
+--------------------------------------------------
+
+  Definition: tr(A) = Σᵢ aᵢᵢ (sum of diagonal elements)
+
+  Diagonal elements: [ 4694 21620 26997  8126]
+  tr(S) = 4694 + 21620 + 26997 + 8126
+        = 61437
+
+--------------------------------------------------
+6.2 DETERMINANT
+--------------------------------------------------
+
+  The determinant measures how a matrix scales volume.
+
+  For 2×2 matrix:
+       |a  b|
+  det  |c  d| = ad - bc
+
+  For larger matrices, use cofactor expansion or LU decomposition.
+
+  det(S) = 7017825274.9999
+
+  Since det(S) ≠ 0, matrix S is invertible
+
+--------------------------------------------------
+6.3 MATRIX INVERSE
+--------------------------------------------------
+
+  Definition: A⁻¹ is the matrix such that AA⁻¹ = A⁻¹A = I
+
+  Exists only if det(A) ≠ 0
+
+  S⁻¹ = 
+    [0.026276, 0.029981, -0.013788, -0.043626]
+    [0.029981, 0.066185, -0.032990, -0.070611]
+    [-0.013788, -0.032990, 0.017928, 0.031658]
+    [-0.043626, -0.070611, 0.031658, 0.090584]
+
+  Verification: S × S⁻¹ ≈ I
+  (S × S⁻¹) = 
+    [1.0000, 0.0000, -0.0000, 0.0000]
+    [-0.0000, 1.0000, 0.0000, -0.0000]
+    [-0.0000, -0.0000, 1.0000, -0.0000]
+    [-0.0000, 0.0000, 0.0000, 1.0000]
+
+======================================================================
+STEP 7: EIGENVALUES AND EIGENVECTORS
+======================================================================
+
+--- Fundamental Definition ---
+
+  Eigenvalue equation: Av = λv
+
+  For a square matrix A:
+  - λ (lambda) is an eigenvalue
+  - v is the corresponding eigenvector
+  - The eigenvector direction is preserved under transformation
+
+--- Finding Eigenvalues ---
+
+  Solve: det(A - λI) = 0
+  This is the characteristic polynomial
+
+--- Eigenanalysis of S (4×4) ---
+
+  Eigenvalues (λ):
+    λ1 = 61054.9122
+    λ2 = 308.3981
+    λ3 = 68.2269
+    λ4 = 5.4628
+
+  Eigenvectors (columns of V):
+    v1 = [0.2722 0.5947 0.6637 0.3628]
+    v2 = [ 0.6882 -0.0383 -0.5223  0.5021]
+    v3 = [ 0.5872 -0.555   0.4587 -0.37  ]
+    v4 = [-0.3279 -0.5804  0.2761  0.6924]
+
+--- Verification: Av = λv ---
+
+  For λ1 = 61054.9122:
+    Av      = [16619.3337 36312.3167 40524.8114 22150.7419]
+    λv      = [16619.3337 36312.3167 40524.8114 22150.7419]
+    Match?  = True
+
+  For λ2 = 308.3981:
+    Av      = [ 212.2348  -11.816  -161.0879  154.8446]
+    λv      = [ 212.2348  -11.816  -161.0879  154.8446]
+    Match?  = True
+
+--- Properties of Eigenvalues ---
+
+  Sum of eigenvalues = tr(S)
+    Σλᵢ = 61437.0000
+    tr(S) = 61437.0000
+    Equal? True
+
+  Product of eigenvalues = det(S)
+    Πλᵢ = 7017825275.0019
+    det(S) = 7017825274.9999
+    Equal? True
+
+======================================================================
+STEP 8: COVARIANCE MATRIX
+======================================================================
+
+--- Definition ---
+
+  The covariance matrix captures relationships between variables:
+
+  Cov(X, Y) = E[(X - μx)(Y - μy)]
+
+  For a data matrix X (n samples × p features):
+  Σ = (1/(n-1)) × (X - X̄)ᵀ(X - X̄)
+
+--- Covariance Matrix of Grade Band Features ---
+
+  Shape: (9, 9)
+
+  Σ = 
+    [    9.58,   -31.17,   -25.08,   -30.67,   -24.92]
+    [  -31.17,   247.00,   246.50,   270.33,   256.17]
+    [  -25.08,   246.50,   252.92,   273.33,   264.42]
+    [  -30.67,   270.33,   273.33,   298.00,   284.67]
+    [  -24.92,   256.17,   264.42,   284.67,   276.92]
+    ...
+
+--- Interpretation ---
+
+  Diagonal elements: Variance of each grade band
+    Var(Grade 1) = 9.58
+    Var(Grade 2) = 247.00
+    Var(Grade 3) = 252.92
+    Var(Grade 4) = 298.00
+    Var(Grade 5) = 276.92
+
+  Off-diagonal elements: Covariance between grade bands
+
+======================================================================
+STEP 9: VISUALISATION
+======================================================================
+
+Visualisation saved: linear_algebra_marking_matrix.png
+
+======================================================================
+STEP 10: APPLICATIONS IN DATA SCIENCE
+======================================================================
+
+--- 1. Principal Component Analysis (PCA) ---
+
+  PCA uses eigendecomposition of the covariance matrix:
+  - Eigenvectors: Principal component directions
+  - Eigenvalues: Variance explained by each component
+
+  Variance explained by each component:
+    PC1: 99.38%
+    PC2: 0.50%
+    PC3: 0.11%
+    PC4: 0.01%
+
+--- 2. Linear Regression ---
+
+  Normal equations: β = (XᵀX)⁻¹Xᵀy
+  Uses matrix inverse to find optimal weights
+
+--- 3. Recommendation Systems ---
+
+  Matrix factorisation: R ≈ UV^T
+  Decomposes rating matrix into user and item factors
+
+--- 4. Neural Networks ---
+
+  Forward propagation: a = σ(Wx + b)
+  Weight matrices transform inputs through layers
+
+======================================================================
+STEP 11: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                   LINEAR ALGEBRA SUMMARY                             │
+├─────────────────────────────────────────────────────────────────────┤
+│  Feature Matrix A:          4 × 9                            │
+│  Covariance Matrix Σ:       9 × 9                            │
+│  Gram Matrix AᵀA:           9 × 9                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  Trace(AAᵀ):                    61437.00                         │
+│  Determinant(AAᵀ):          7017825275.00                         │
+├─────────────────────────────────────────────────────────────────────┤
+│  Dominant Eigenvalue:           61054.91                         │
+│  Variance by PC1:                 99.38%                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+--- Further Reading ---
+  Strang, G. (2016) Introduction to Linear Algebra. 5th edn.
+  Wellesley-Cambridge Press.
+
+======================================================================
+END OF LINEAR ALGEBRA ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

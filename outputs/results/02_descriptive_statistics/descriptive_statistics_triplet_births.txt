@@ -1,0 +1,261 @@
+======================================================================
+DESCRIPTIVE STATISTICS
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+Analysis period: 1990 - 2020
+Number of observations: 31
+
+======================================================================
+STEP 2: MEASURES OF CENTRAL TENDENCY
+======================================================================
+
+--------------------------------------------------
+ARITHMETIC MEAN
+--------------------------------------------------
+
+  Formula: x̄ = (1/n) × Σxᵢ
+
+  The arithmetic mean is the sum of all observations
+  divided by the number of observations.
+
+  Step-by-step calculation:
+  n = 31
+  Σxᵢ = 6708
+  x̄ = 6708 / 31 = 216.39
+
+--------------------------------------------------
+MEDIAN
+--------------------------------------------------
+
+  The median is the middle value when data is ordered.
+  For even n: median = (x_{n/2} + x_{n/2+1}) / 2
+  For odd n: median = x_{(n+1)/2}
+
+  Sorted data (first 10 values): [149. 156. 167. 177. 179. 179. 181. 188. 193. 197.]
+  Sorted data (last 10 values): [231. 231. 233. 240. 244. 256. 263. 271. 314. 317.]
+
+  n = 31 (odd)
+  median = x_16
+  median = 211.00
+
+--------------------------------------------------
+MODE
+--------------------------------------------------
+
+  The mode is the most frequently occurring value.
+
+  Value frequency distribution:
+    179: appears 2 time(s)
+    205: appears 2 time(s)
+    226: appears 2 time(s)
+    231: appears 2 time(s)
+    149: appears 1 time(s)
+
+  Dataset is multimodal with values: [179. 205. 226. 231.]
+
+--------------------------------------------------
+COMPARISON OF CENTRAL TENDENCY MEASURES
+--------------------------------------------------
+
+  Mean:   216.39
+  Median: 211.00
+  Mode:   179
+
+  Mean > Median suggests positive skewness
+
+======================================================================
+STEP 3: MEASURES OF DISPERSION
+======================================================================
+
+--------------------------------------------------
+RANGE
+--------------------------------------------------
+
+  Formula: Range = x_max - x_min
+
+  x_min = 149
+  x_max = 317
+  Range = 317 - 149 = 168
+
+--------------------------------------------------
+VARIANCE AND STANDARD DEVIATION
+--------------------------------------------------
+
+  Population Variance:
+  σ² = (1/n) × Σ(xᵢ - μ)²
+
+  Sample Variance (unbiased estimator):
+  s² = (1/(n-1)) × Σ(xᵢ - x̄)²
+
+  Standard Deviation:
+  s = √s²
+
+  Step-by-step calculation:
+
+  1. Calculate deviations from mean (xᵢ - x̄):
+     First 5 deviations: [100.61290323  97.61290323  39.61290323  54.61290323  27.61290323]
+
+  2. Square the deviations (xᵢ - x̄)²:
+     First 5 squared deviations: [10122.95629553  9528.27887617  1569.18210198  2982.56919875
+   762.47242456]
+
+  3. Sum of squared deviations:
+     Σ(xᵢ - x̄)² = 47491.35
+
+  4. Population Variance:
+     σ² = 47491.35 / 31 = 1531.98
+
+  5. Sample Variance (using n-1 for unbiased estimation):
+     s² = 47491.35 / 30 = 1583.05
+
+  6. Sample Standard Deviation:
+     s = √1583.05 = 39.79
+
+--------------------------------------------------
+INTERQUARTILE RANGE (IQR)
+--------------------------------------------------
+
+  The IQR measures the spread of the middle 50% of data.
+  Formula: IQR = Q3 - Q1
+
+  Q1 (25th percentile) = 190.50
+  Q2 (50th percentile / median) = 211.00
+  Q3 (75th percentile) = 232.00
+  IQR = 232.00 - 190.50 = 41.50
+
+  Outlier Detection (1.5 × IQR rule):
+  Lower fence = Q1 - 1.5×IQR = 190.50 - 1.5×41.50 = 128.25
+  Upper fence = Q3 + 1.5×IQR = 232.00 + 1.5×41.50 = 294.25
+  Number of outliers: 2
+
+--------------------------------------------------
+COEFFICIENT OF VARIATION
+--------------------------------------------------
+
+  Formula: CV = (s / x̄) × 100%
+  The CV expresses standard deviation as a percentage of the mean.
+
+  CV = (39.79 / 216.39) × 100% = 18.39%
+
+  Interpretation: Moderate variability
+
+======================================================================
+STEP 4: SHAPE MEASURES
+======================================================================
+
+--------------------------------------------------
+SKEWNESS
+--------------------------------------------------
+
+  Formula: γ₁ = (1/n) × Σ[(xᵢ - x̄)/s]³
+
+  Skewness measures the asymmetry of the distribution:
+  - γ₁ > 0: Positive skew (right tail longer)
+  - γ₁ < 0: Negative skew (left tail longer)
+  - γ₁ = 0: Symmetric distribution
+
+  Calculation:
+  Standardized values: z = (x - x̄)/s
+  Skewness γ₁ = 0.7239
+  Interpretation: Distribution is positively skewed (right-tailed)
+
+--------------------------------------------------
+KURTOSIS
+--------------------------------------------------
+
+  Formula: γ₂ = (1/n) × Σ[(xᵢ - x̄)/s]⁴ - 3
+
+  Kurtosis measures the 'tailedness' of the distribution:
+  - γ₂ > 0: Leptokurtic (heavier tails than normal)
+  - γ₂ < 0: Platykurtic (lighter tails than normal)
+  - γ₂ = 0: Mesokurtic (similar to normal)
+
+  Excess Kurtosis γ₂ = 0.3396
+  Interpretation: Distribution is mesokurtic (similar to normal)
+
+======================================================================
+STEP 5: FIVE-NUMBER SUMMARY
+======================================================================
+
+  The five-number summary provides a complete overview of the distribution:
+
+  ┌─────────────────────────────────────────┐
+  │       FIVE-NUMBER SUMMARY               │
+  ├─────────────────────────────────────────┤
+  │  Minimum                  149.00      │
+  │  Q1 (25%)                 190.50      │
+  │  Median (50%)             211.00      │
+  │  Q3 (75%)                 232.00      │
+  │  Maximum                  317.00      │
+  └─────────────────────────────────────────┘
+
+======================================================================
+STEP 6: COMPLETE STATISTICS SUMMARY
+======================================================================
+
+
+     Statistic       Value
+     Count (n)   31.000000
+     Sum (Σxᵢ) 6708.000000
+     Mean (x̄)  216.387097
+        Median  211.000000
+          Mode  179.000000
+       Minimum  149.000000
+       Maximum  317.000000
+         Range  168.000000
+ Variance (s²) 1583.045161
+   Std Dev (s)   39.787500
+Std Error (SE)    7.146046
+            Q1  190.500000
+            Q3  232.000000
+           IQR   41.500000
+        CV (%)   18.387187
+      Skewness    0.723937
+      Kurtosis    0.339596
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+
+Visualisation saved: descriptive_statistics_triplet_births.png
+
+======================================================================
+STEP 8: KEY FINDINGS
+======================================================================
+
+--- Central Tendency ---
+  Mean triplet births per year: 216.4
+  The median (211.0) is different from the mean
+
+--- Dispersion ---
+  Standard deviation: 39.79
+  68% of years have between 177 and 256 triplet births
+  95% of years have between 137 and 296 triplet births
+
+--- Distribution Shape ---
+  Skewness: 0.7239 (mesokurtic (similar to normal))
+  The data appears to follow a fairly symmetric distribution
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+======================================================================
+END OF DESCRIPTIVE STATISTICS ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

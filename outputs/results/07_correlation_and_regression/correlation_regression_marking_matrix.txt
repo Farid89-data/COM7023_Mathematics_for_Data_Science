@@ -1,0 +1,344 @@
+======================================================================
+CORRELATION AND REGRESSION
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Number of Learning Outcomes: 4
+Number of Grade Bands: 9
+
+--- Feature Matrix (Word Counts) ---
+ LO  Grade_95  Grade_85  Grade_74.5  Grade_64.5  Grade_54.5  Grade_44.5  Grade_34.5  Grade_24.5  Grade_9.5
+LO1        16        28          24          29          22          18          18          23         24
+LO2        18        50          51          56          51          54          54          51         45
+LO3        12        61          58          65          58          59          60          57         43
+LO4        19        31          32          34          32          30          30          30         30
+
+======================================================================
+STEP 2: PEARSON CORRELATION COEFFICIENT
+======================================================================
+
+--- Definition ---
+
+  The Pearson correlation coefficient measures linear association:
+
+            Σ(xᵢ - x̄)(yᵢ - ȳ)
+  r = ─────────────────────────────────
+       √[Σ(xᵢ - x̄)²] × √[Σ(yᵢ - ȳ)²]
+
+  Properties:
+    -1 ≤ r ≤ 1
+    r = 1:  Perfect positive linear relationship
+    r = -1: Perfect negative linear relationship
+    r = 0:  No linear relationship
+
+--- Manual Calculation Example ---
+
+  Variables: Grade_95 (x) vs Grade_54.5 (y)
+
+  Step 1: Calculate means
+    x̄ = 16.2500
+    ȳ = 40.7500
+
+  Step 2: Calculate deviations
+    i    xᵢ     yᵢ    (xᵢ-x̄)   (yᵢ-ȳ)  (xᵢ-x̄)(yᵢ-ȳ)
+    -------------------------------------------------------
+    1      16     22     -0.25   -18.75        4.69
+    2      18     51      1.75    10.25       17.94
+    3      12     58     -4.25    17.25      -73.31
+    4      19     32      2.75    -8.75      -24.06
+
+  Step 3: Calculate correlation
+    Σ(xᵢ - x̄)(yᵢ - ȳ) = -74.7500
+    √Σ(xᵢ - x̄)² = 5.3619
+    √Σ(yᵢ - ȳ)² = 28.8227
+    r = -74.7500 / (5.3619 × 28.8227)
+    r = -0.483679
+
+  Verification (scipy.stats.pearsonr):
+    r = -0.483679
+    p-value = 0.516321
+
+======================================================================
+STEP 3: CORRELATION MATRIX
+======================================================================
+
+--- Computing Correlation Matrix ---
+
+  A correlation matrix shows pairwise correlations between all variables.
+
+  Correlation Matrix:
+  --------------------------------------------------------------------------------
+           G95     G85     G74     G64     G54     G44     G34     G24      G9
+   G95   1.000  -0.641  -0.509  -0.574  -0.484  -0.432  -0.448  -0.503  -0.292
+   G85  -0.641   1.000   0.986   0.996   0.979   0.969   0.973   0.986   0.920
+   G74  -0.509   0.986   1.000   0.996   0.999   0.996   0.998   0.999   0.966
+   G64  -0.574   0.996   0.996   1.000   0.991   0.985   0.988   0.996   0.949
+   G54  -0.484   0.979   0.999   0.991   1.000   0.998   0.999   0.997   0.968
+   G44  -0.432   0.969   0.996   0.985   0.998   1.000   1.000   0.996   0.983
+   G34  -0.448   0.973   0.998   0.988   0.999   1.000   1.000   0.997   0.979
+   G24  -0.503   0.986   0.999   0.996   0.997   0.996   0.997   1.000   0.971
+    G9  -0.292   0.920   0.966   0.949   0.968   0.983   0.979   0.971   1.000
+
+--- Interpretation ---
+
+  Strongest Positive Correlations:
+    G74 vs G24: r = 0.9990
+    G74 vs G54: r = 0.9991
+    G44 vs G34: r = 0.9998
+
+  Weakest/Negative Correlations:
+    G95 vs G85: r = -0.6406
+    G95 vs G64: r = -0.5739
+    G95 vs G74: r = -0.5095
+
+======================================================================
+STEP 4: SPEARMAN RANK CORRELATION
+======================================================================
+
+--- Definition ---
+
+  Spearman's rank correlation measures monotonic relationships:
+
+  1. Rank each variable from 1 to n
+  2. Calculate Pearson correlation on ranks
+
+  Formula (when no ties):
+              6 × Σdᵢ²
+  ρ = 1 - ─────────────
+           n(n² - 1)
+
+  where dᵢ = rank(xᵢ) - rank(yᵢ)
+
+--- Example Calculation ---
+
+  Original and Ranked Values:
+    i    xᵢ   rank(xᵢ)    yᵢ   rank(yᵢ)    dᵢ
+    --------------------------------------------------
+    1     16       2.0     22       1.0      1.0
+    2     18       3.0     51       3.0      0.0
+    3     12       1.0     58       4.0     -3.0
+    4     19       4.0     32       2.0      2.0
+
+  Calculation:
+    Σdᵢ² = 14.00
+    n = 4
+    ρ = 1 - (6 × 14.00) / (4 × (4² - 1))
+    ρ = 1 - 84.00 / 60
+    ρ = -0.400000
+
+  Verification (scipy.stats.spearmanr):
+    ρ = -0.400000
+    p-value = 0.600000
+
+--- Comparison: Pearson vs Spearman ---
+    Pearson r = -0.483679
+    Spearman ρ = -0.400000
+
+  Interpretation:
+    Similar values suggest a linear relationship
+
+======================================================================
+STEP 5: SIMPLE LINEAR REGRESSION
+======================================================================
+
+--- The Linear Regression Model ---
+
+  Model: y = β₀ + β₁x + ε
+
+  where:
+    β₀ = intercept (y-value when x = 0)
+    β₁ = slope (change in y per unit change in x)
+    ε = random error term
+
+--- Least Squares Estimation ---
+
+  Minimise the sum of squared residuals:
+    SSE = Σ(yᵢ - ŷᵢ)² = Σ(yᵢ - β₀ - β₁xᵢ)²
+
+  Solutions:
+           Σ(xᵢ - x̄)(yᵢ - ȳ)
+    β̂₁ = ─────────────────────
+             Σ(xᵢ - x̄)²
+
+    β̂₀ = ȳ - β̂₁x̄
+
+--- Calculation (Grade_95 predicting Grade_54.5) ---
+
+  Step 1: Calculate means
+    x̄ = 16.2500
+    ȳ = 40.7500
+
+  Step 2: Calculate β̂₁ (slope)
+    Σ(xᵢ - x̄)(yᵢ - ȳ) = -74.7500
+    Σ(xᵢ - x̄)² = 28.7500
+    β̂₁ = -74.7500 / 28.7500
+    β̂₁ = -2.600000
+
+  Step 3: Calculate β̂₀ (intercept)
+    β̂₀ = 40.7500 - (-2.600000 × 16.2500)
+    β̂₀ = 83.000000
+
+  Regression Equation:
+    ŷ = 83.0000 + -2.6000x
+
+  Verification (scipy.stats.linregress):
+    β̂₁ = -2.600000
+    β̂₀ = 83.000000
+
+======================================================================
+STEP 6: COEFFICIENT OF DETERMINATION (R²)
+======================================================================
+
+--- Definition ---
+
+  R² measures the proportion of variance in y explained by x:
+
+           SSₜₒₜ - SSᵣₑₛ       SSᵣₑₛ
+  R² = ─────────────── = 1 - ─────────
+            SSₜₒₜ             SSₜₒₜ
+
+  where:
+    SSₜₒₜ = Σ(yᵢ - ȳ)²     (Total Sum of Squares)
+    SSᵣₑₛ = Σ(yᵢ - ŷᵢ)²   (Residual Sum of Squares)
+
+--- Calculation ---
+
+  Step 1: Calculate predicted values
+    i    yᵢ     ŷᵢ    (yᵢ - ȳ)²  (yᵢ - ŷᵢ)²
+    --------------------------------------------------
+    1     22   41.40     351.56     376.36
+    2     51   36.20     105.06     219.04
+    3     58   51.80     297.56      38.44
+    4     32   33.60      76.56       2.56
+
+  Step 2: Calculate sums of squares
+    SSₜₒₜ = Σ(yᵢ - ȳ)² = 830.7500
+    SSᵣₑₛ = Σ(yᵢ - ŷᵢ)² = 636.4000
+    SSᵣₑᵍ = Σ(ŷᵢ - ȳ)² = 194.3500
+
+    Verification: SSₜₒₜ ≈ SSᵣₑₛ + SSᵣₑᵍ
+    830.7500 ≈ 636.4000 + 194.3500 = 830.7500
+
+  Step 3: Calculate R²
+    R² = 1 - (636.4000 / 830.7500)
+    R² = 1 - 0.766055
+    R² = 0.233945
+
+--- Interpretation ---
+    23.39% of the variance in Grade_54.5 is explained by Grade_95
+
+    Note: R² = r² for simple linear regression
+    r² = 0.233945 ≈ R² = 0.233945
+
+======================================================================
+STEP 7: RESIDUAL ANALYSIS
+======================================================================
+
+--- Residuals ---
+
+  Residuals are the differences between observed and predicted values:
+    eᵢ = yᵢ - ŷᵢ
+
+  Properties of residuals in OLS:
+    1. Σeᵢ = 0 (residuals sum to zero)
+    2. Σxᵢeᵢ = 0 (residuals uncorrelated with x)
+    3. Mean of residuals = 0
+
+--- Residual Summary ---
+    Sum of residuals: Σeᵢ = 0.0000000000 ≈ 0
+    Mean of residuals: ē = 0.0000000000 ≈ 0
+    Σxᵢeᵢ = 0.0000000000 ≈ 0
+
+--- Residual Statistics ---
+    Standard deviation of residuals: 17.8382
+    Minimum residual: -19.4000
+    Maximum residual: 14.8000
+
+--- Standardised Residuals ---
+    (Should be within ±2 for 95% of observations)
+    Observation 1: -1.0876 
+    Observation 2:  0.8297 
+    Observation 3:  0.3476 
+    Observation 4: -0.0897 
+
+======================================================================
+STEP 8: SIGNIFICANCE TESTING
+======================================================================
+
+--- Hypothesis Test for Slope ---
+
+  H₀: β₁ = 0 (no linear relationship)
+  H₁: β₁ ≠ 0 (linear relationship exists)
+
+  Test statistic:
+           β̂₁
+    t = ────────
+         SE(β̂₁)
+
+--- Calculation ---
+    MSE = SSᵣₑₛ / (n - 2) = 636.4000 / 2 = 318.2000
+    SE(β̂₁) = √(MSE / Σ(xᵢ - x̄)²) = √(318.2000 / 28.7500)
+    SE(β̂₁) = 3.326834
+
+    t = -2.600000 / 3.326834 = -0.7815
+    Degrees of freedom: df = n - 2 = 2
+    p-value (two-tailed) = 0.516321
+
+--- Decision (α = 0.05) ---
+    p-value (0.516321) ≥ α (0.05)
+    Fail to reject H₀: No significant linear relationship
+
+======================================================================
+STEP 9: VISUALISATION
+======================================================================
+
+Visualisation saved: correlation_regression_marking_matrix.png
+
+======================================================================
+STEP 10: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│               CORRELATION AND REGRESSION SUMMARY                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  CORRELATION ANALYSIS                                                │
+│    Pearson r (Grade_95 vs Grade_54.5):   -0.483679                │
+│    Spearman ρ:                           -0.400000                │
+├─────────────────────────────────────────────────────────────────────┤
+│  REGRESSION ANALYSIS                                                 │
+│    Intercept (β̂₀):                         83.0000                    │
+│    Slope (β̂₁):                           -2.600000                │
+│    R²:                                    0.233945                │
+├─────────────────────────────────────────────────────────────────────┤
+│  HYPOTHESIS TEST                                                     │
+│    t-statistic:                            -0.7815                    │
+│    p-value:                               0.516321                │
+│    Significant (α=0.05):                        No                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+--- Further Reading ---
+  Freedman, D.A. (2009) Statistical Models: Theory and Practice.
+  Cambridge University Press.
+
+======================================================================
+END OF CORRELATION AND REGRESSION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

@@ -1,0 +1,138 @@
+======================================================================
+DATA LOADING AND EXPLORATION
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+File path: /home/codespace/COM7023_Mathematics_for_Data_Science/01_data_loading_and_exploration/../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv
+
+======================================================================
+STEP 2: UNDERSTANDING DATA STRUCTURE
+======================================================================
+
+--- Dataset Dimensions ---
+Number of rows: 4
+Number of columns: 10
+Total cells: 40
+
+--- Column Names ---
+  1. Criterion
+  2. 90- 100
+  3. 80 - 90
+  4. 70 – 79
+  5. 60 - 69
+  6. 50 – 59
+  7. 40 – 49
+  8. 30 – 39
+  9. 20 - 29
+  10. 0 - 19
+
+--- Data Types ---
+Criterion    str
+90- 100      str
+80 - 90      str
+70 – 79      str
+60 - 69      str
+50 – 59      str
+40 – 49      str
+30 – 39      str
+20 - 29      str
+0 - 19       str
+dtype: object
+
+======================================================================
+STEP 3: DATA PREVIEW
+======================================================================
+
+--- First 5 Rows ---
+                                           Criterion                                            90- 100                                            80 - 90                                            70 – 79                                            60 - 69                                            50 – 59                                            40 – 49                                            30 – 39                                            20 - 29                                             0 - 19
+0  Develop an advanced \nunderstanding of mathema...  Exemplary understanding of all advanced mathem...  An outstanding formulation of the practises in...  An excellent formulation\nof the practices inv...  A very good formulationof most of the practice...  A satisfactory formulation\nof most practices ...  Insufficient \nFormulation of the practices in...  Underdeveloped\nFormulation of the practices i...  A minimal\nformulation of the practices involv...  No formulation of the practices involved when ...
+1  Apply mathematical principles\nto solve data s...  Exemplary understanding of all mathematical pr...  Outstanding application of mathematical princi...  A excellent application of mathematical princi...  A very good application of mathematical princi...  A satisfactory application of mathematical pri...  An insufficient application of mathematical pr...  An underdeveloped \napplication of mathematica...  The minimal \napplication of mathematical prin...  No application of mathematical principles to s...
+2  Deploy mathematical functions\nand equations t...  Exemplary understanding of all mathematical fu...  Outstanding deployment of mathematical functio...  Excellent deployment \nof mathematical functio...  Very good deployment \nof mathematical functio...  A satisfactory deployment \nof mathematical fu...  Deployment of \nmathematical functions \nto de...  An underdeveloped deployment of \nmathematical...  The minimal deployment of \nmathematical funct...  No deployment of \nmathematical functions \nto...
+3  Graduate Attribute\nIdentify and solve novel a...  Exemplary identification of novel solutions fo...  Outstanding insightful reflection on identifyi...  An excellent insightful reflection on identify...  A very good insightful \nreflection on identif...  A satisfactory insightful \nreflection on iden...  Insufficient reflection on identifying \nnovel...  An underdeveloped reflection on identifying \n...  Minimal reflection on identifying \nnovel appr...  No reflection on identifying \nnovel approache...
+
+--- Criteria (Learning Outcomes) ---
+  LO1: Develop an advanced understanding of mathematical concepts and their application...
+  LO2: Apply mathematical principles to solve data science-related problems. LO 2...
+  LO3: Deploy mathematical functions and equations to derive advance analytical solutio...
+  LO4: Graduate Attribute Identify and solve novel and complex problems related to aims...
+
+======================================================================
+STEP 4: DATA QUALITY ASSESSMENT
+======================================================================
+
+--- Missing Values ---
+Criterion    0
+90- 100      0
+80 - 90      0
+70 – 79      0
+60 - 69      0
+50 – 59      0
+40 – 49      0
+30 – 39      0
+20 - 29      0
+0 - 19       0
+dtype: int64
+
+Total missing values: 0
+
+--- Duplicate Rows ---
+Number of duplicate rows: 0
+
+--- Memory Usage ---
+Total memory usage: 13.21 KB
+
+======================================================================
+STEP 5: BASIC STATISTICAL SUMMARY
+======================================================================
+
+--- Text Length Analysis ---
+
+Average text length by grade band:
+  90- 100: 148.5 characters
+  80 - 90: 346.2 characters
+  70 – 79: 328.8 characters
+  60 - 69: 337.0 characters
+  50 – 59: 331.5 characters
+  40 – 49: 330.8 characters
+  30 – 39: 340.5 characters
+  20 - 29: 307.8 characters
+  0 - 19: 256.0 characters
+
+======================================================================
+STEP 6: DATA VISUALISATION
+======================================================================
+
+Visualisation saved: data_loading_marking_matrix.png
+
+======================================================================
+STEP 7: KEY FINDINGS SUMMARY
+======================================================================
+
+--- Summary ---
+  1. Dataset contains 4 learning outcomes (rows)
+  2. Dataset contains 10 columns (1 criterion + 9 grade bands)
+  3. All cells contain data (no missing values)
+  4. Higher grades have more detailed descriptions
+  5. Dataset structure is suitable for text analysis and categorisation
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+======================================================================
+END OF DATA LOADING AND EXPLORATION
+Student: Farid Negahbnai (24154844)
+======================================================================

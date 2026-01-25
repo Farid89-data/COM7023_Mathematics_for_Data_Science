@@ -1,0 +1,210 @@
+======================================================================
+PROBABILITY DISTRIBUTIONS
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Number of Learning Outcomes: 4
+Number of Grade Bands: 9
+
+======================================================================
+STEP 2: DISCRETE PROBABILITY FUNDAMENTALS
+======================================================================
+
+--- Probability Axioms ---
+
+  1. P(A) ≥ 0 for any event A
+  2. P(S) = 1 where S is the sample space
+  3. P(A ∪ B) = P(A) + P(B) if A and B are mutually exclusive
+
+--- Creating a Hypothetical Grade Distribution ---
+
+  Let's model a hypothetical grade distribution for this module.
+
+  Hypothetical Grade Distribution P(G = g):
+
+  Grade Band    Probability    P(G = g)
+  ---------------------------------------------
+  90- 100         0.05         ██
+  80 - 90         0.10         █████
+  70 – 79         0.20         ██████████
+  60 - 69         0.25         ████████████
+  50 – 59         0.20         ██████████
+  40 – 49         0.12         ██████
+  30 – 39         0.05         ██
+  20 - 29         0.02         █
+  0 - 19          0.01         
+
+  Verification: ΣP(G = g) = 1.00 (should be 1.00)
+
+======================================================================
+STEP 3: EXPECTED VALUE AND VARIANCE
+======================================================================
+
+--- Expected Value (Mean) ---
+
+  Formula: E[X] = Σ xᵢ × P(X = xᵢ)
+
+  For discrete random variable X:
+
+  Step-by-step calculation:
+
+  E[Grade] = Σ (midpoint × probability)
+
+  Grade Band    Midpoint    P(G=g)    Contribution
+  -------------------------------------------------------
+  90- 100         95.0     0.05         4.75
+  80 - 90         85.0     0.10         8.50
+  70 – 79         74.5     0.20        14.90
+  60 - 69         64.5     0.25        16.12
+  50 – 59         54.5     0.20        10.90
+  40 – 49         44.5     0.12         5.34
+  30 – 39         34.5     0.05         1.73
+  20 - 29         24.5     0.02         0.49
+  0 - 19           9.5     0.01         0.10
+  -------------------------------------------------------
+  Expected Grade (Mean): E[G] = 62.83
+
+--- Variance ---
+
+  Formula: Var(X) = E[X²] - (E[X])²
+          = Σ xᵢ² × P(X = xᵢ) - μ²
+
+  Calculation:
+  E[G²] = Σ(midpoint² × probability) = 4227.96
+  Var(G) = E[G²] - (E[G])² = 4227.96 - (62.83)²
+  Var(G) = 4227.96 - 3946.98 = 280.98
+  SD(G) = √Var(G) = √280.98 = 16.76
+
+======================================================================
+STEP 4: CONDITIONAL PROBABILITY
+======================================================================
+
+--- Conditional Probability Formula ---
+
+  P(A|B) = P(A ∩ B) / P(B)
+
+  Reads: Probability of A given B
+
+  Event Probabilities:
+  P(Pass) = P(Grade ≥ 40) = 0.92
+  P(Distinction) = P(Grade ≥ 70) = 0.35
+  P(Fail) = P(Grade < 40) = 0.08
+
+  Conditional Probability:
+  P(Distinction | Pass) = P(Distinction ∩ Pass) / P(Pass)
+                        = P(Distinction) / P(Pass)
+                        = 0.35 / 0.92
+                        = 0.3804
+
+  Interpretation: Given a student passes, there is a
+  38.0% chance they achieve distinction.
+
+======================================================================
+STEP 5: CUMULATIVE DISTRIBUTION FUNCTION (CDF)
+======================================================================
+
+--- CDF Definition ---
+
+  F(x) = P(X ≤ x) = Σ P(X = xᵢ) for all xᵢ ≤ x
+
+  Grade Band    P(G = g)    F(g) = P(G ≤ g)
+  --------------------------------------------------
+  0 - 19          0.01          0.01
+  20 - 29         0.02          0.03
+  30 – 39         0.05          0.08
+  40 – 49         0.12          0.20
+  50 – 59         0.20          0.40
+  60 - 69         0.25          0.65
+  70 – 79         0.20          0.85
+  80 - 90         0.10          0.95
+  90- 100         0.05          1.00
+
+--- Using CDF for Probability Calculations ---
+
+  P(50 ≤ G ≤ 69) = F(69) - F(49)
+                 = 0.65 - 0.20
+                 = 0.45
+
+======================================================================
+STEP 6: BINOMIAL DISTRIBUTION EXAMPLE
+======================================================================
+
+--- Binomial Distribution ---
+
+  P(X = k) = C(n,k) × p^k × (1-p)^(n-k)
+
+  where C(n,k) = n! / (k! × (n-k)!)
+
+  Used when:
+  - Fixed number of trials (n)
+  - Two possible outcomes (success/failure)
+  - Constant probability of success (p)
+  - Independent trials
+
+  Example: Class of 10 students, P(pass) = 0.92
+
+  What is P(exactly k students pass)?
+
+  k    P(X = k)      Calculation
+  ------------------------------------------------------------
+  0    0.000000      C(10,0) × 0.92^0 × 0.08^10
+  1    0.000000      C(10,1) × 0.92^1 × 0.08^9
+  2    0.000000      C(10,2) × 0.92^2 × 0.08^8
+  3    0.000002      C(10,3) × 0.92^3 × 0.08^7
+  4    0.000039      C(10,4) × 0.92^4 × 0.08^6
+  5    0.000544      C(10,5) × 0.92^5 × 0.08^5
+  6    0.005216      C(10,6) × 0.92^6 × 0.08^4
+  7    0.034274      C(10,7) × 0.92^7 × 0.08^3
+  8    0.147807      C(10,8) × 0.92^8 × 0.08^2
+  9    0.377729      C(10,9) × 0.92^9 × 0.08^1
+  10   0.434388      C(10,10) × 0.92^10 × 0.08^0
+
+  Expected number of passes: E[X] = n × p = 10 × 0.92 = 9.20
+  Variance: Var(X) = n × p × (1-p) = 0.74
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+
+Visualisation saved: probability_distributions_marking_matrix.png
+
+======================================================================
+STEP 8: KEY FINDINGS
+======================================================================
+
+--- Summary Statistics ---
+  Expected Grade: 62.83
+  Standard Deviation: 16.76
+  Probability of Passing: 92.00%
+  Probability of Distinction: 35.00%
+
+--- Key Concepts Demonstrated ---
+  1. Probability Mass Function (PMF) for discrete distributions
+  2. Expected value as weighted average
+  3. Variance as measure of spread
+  4. Conditional probability using Bayes' theorem
+  5. Cumulative Distribution Function (CDF)
+  6. Binomial distribution for binary outcomes
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+======================================================================
+END OF PROBABILITY DISTRIBUTIONS ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

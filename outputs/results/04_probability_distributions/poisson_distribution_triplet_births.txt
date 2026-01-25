@@ -1,0 +1,265 @@
+======================================================================
+POISSON DISTRIBUTION FOR RARE EVENTS
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+Source: Human Multiple Births Database (2024)
+
+Analysis Period: 1990 - 2020
+Number of Observations: n = 31 years
+Total Triplet Births: 6708
+
+======================================================================
+STEP 2: POISSON DISTRIBUTION - THEORETICAL FOUNDATION
+======================================================================
+
+--- When to Use Poisson Distribution ---
+
+  The Poisson distribution models the number of events occurring
+  in a fixed interval (time or space) when:
+
+  1. Events occur independently
+  2. The average rate (λ) is constant
+  3. Two events cannot occur simultaneously
+  4. Events are rare relative to opportunities
+
+--- Why Triplet Births Follow Poisson ---
+
+  ✓ Rare events: Triplets occur infrequently (~0.01% of births)
+  ✓ Independence: One triplet birth doesn't affect another
+  ✓ Constant rate: Average rate relatively stable over time
+  ✓ Non-simultaneous: Births are discrete events
+
+--- Poisson Probability Mass Function ---
+
+            λ^k × e^(-λ)
+  P(X = k) = ───────────────
+                  k!
+
+  where:
+  λ = average rate of events (parameter)
+  k = number of events (k = 0, 1, 2, ...)
+  e ≈ 2.71828 (Euler's number)
+
+======================================================================
+STEP 3: MAXIMUM LIKELIHOOD ESTIMATION (MLE)
+======================================================================
+
+--- MLE for Poisson Distribution ---
+
+  The likelihood function for observations x₁, x₂, ..., xₙ:
+
+              n    λ^xᵢ × e^(-λ)
+  L(λ) = ∏   ─────────────────
+             i=1      xᵢ!
+
+--- Log-Likelihood Function ---
+
+  Taking natural log for easier differentiation:
+
+  ℓ(λ) = Σ[xᵢ × ln(λ) - λ - ln(xᵢ!)]
+
+--- Finding the MLE ---
+
+  Differentiate with respect to λ and set to zero:
+
+  dℓ/dλ = Σxᵢ/λ - n = 0
+
+  Solving for λ:
+
+  λ̂_MLE = (1/n) × Σxᵢ = x̄ (sample mean)
+
+--- Numerical Calculation ---
+
+  n = 31
+  Σxᵢ = 6708
+
+  λ̂_MLE = 6708 / 31
+  λ̂_MLE = 216.39
+
+  ✓ Estimated Poisson Parameter: λ = 216.39
+
+======================================================================
+STEP 4: EXPECTED VALUE AND VARIANCE
+======================================================================
+
+--- Key Property of Poisson Distribution ---
+
+  For Poisson(λ):
+
+  E[X] = λ     (Expected value equals parameter)
+  Var(X) = λ   (Variance equals parameter)
+  SD(X) = √λ   (Standard deviation)
+
+  This unique property: E[X] = Var(X) = λ
+  is a key diagnostic for Poisson appropriateness
+
+--- Theoretical Values (from λ̂) ---
+
+  E[X] = λ = 216.39
+  Var(X) = λ = 216.39
+  SD(X) = √λ = 14.71
+
+--- Sample Statistics ---
+
+  Sample Mean (x̄) = 216.39
+  Sample Variance (s²) = 1583.05
+  Sample SD (s) = 39.79
+
+--- Model Validation: Variance/Mean Ratio ---
+
+  Ratio = s² / x̄ = 1583.05 / 216.39 = 7.3158
+
+  Interpretation:
+    Ratio ≈ 1.0: Poisson model appropriate
+    Ratio > 1.2: Over-dispersion (variance > mean)
+    Ratio < 0.8: Under-dispersion (variance < mean)
+
+  ⚠ Ratio = 7.3158 suggests model may need review
+
+======================================================================
+STEP 5: POISSON PROBABILITY CALCULATIONS
+======================================================================
+
+--- Probability Mass Function Examples ---
+
+  Using λ = 216.39
+
+  P(X = k) = (216.39^k × e^(-216.39)) / k!
+
+       k           P(X = k)    Interpretation
+  -------------------------------------------------------
+     186       0.0031091088    2.1σ below mean
+     201       0.0160581902    1.0σ below mean
+     216       0.0271247147    ≈ Mean (μ)
+     231       0.0161930057    1.0σ above mean
+     245       0.0041552565    1.9σ above mean
+
+======================================================================
+STEP 6: CUMULATIVE DISTRIBUTION FUNCTION
+======================================================================
+
+--- CDF Definition ---
+
+  F(k) = P(X ≤ k) = Σᵢ₌₀ᵏ P(X = i)
+
+  The CDF gives the probability of observing at most k events.
+
+--- Practical Probability Calculations ---
+
+  1. P(X > 200) = 1 - P(X ≤ 200)
+                    = 1 - F(200)
+                    = 1 - 0.139589
+                    = 0.860411
+
+     Interpretation: 86.04% probability of more than
+                     200 triplet births in a year
+
+  2. P(X < 150) = P(X ≤ 149)
+                    = F(149)
+                    = 0.000001
+
+     Interpretation: 0.00% probability of fewer than
+                     150 triplet births in a year
+
+  3. P(201 ≤ X ≤ 231) [within ±1σ]
+     = F(231) - F(200)
+     = 0.847782 - 0.139589
+     = 0.708193
+
+     Interpretation: 70.82% of years have
+                     triplet births within ±1σ of mean
+
+  4. P(186 ≤ X ≤ 245) [within ±2σ]
+     = 0.958175
+
+     Interpretation: 95.82% of years have
+                     triplet births within ±2σ of mean
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+
+Visualisation saved: poisson_distribution_triplet_births.png
+
+======================================================================
+STEP 8: MODEL EVALUATION AND CRITICAL ANALYSIS
+======================================================================
+
+--- Model Assumptions Assessment ---
+
+  1. RARE EVENTS: ✓
+     Triplets are rare (~0.01% of all births)
+
+  2. INDEPENDENCE: ✓
+     Individual triplet births are independent events
+
+  3. CONSTANT RATE: ~✓
+     λ = 216.39 assumed constant over analysis period
+     (May be affected by fertility treatments)
+
+  4. NON-SIMULTANEOUS: ✓
+     Events occur discretely in time
+
+--- Goodness of Fit ---
+
+  Variance/Mean Ratio: 7.3158
+  Assessment: Model may need refinement
+
+--- Limitations ---
+
+  1. Temporal trends: IVF and fertility treatments may cause
+     non-stationarity in λ over time
+
+  2. Sample size: 31 annual observations provides moderate
+     confidence in parameter estimates
+
+  3. Aggregation: Annual data may mask seasonal patterns
+
+--- Recommendations ---
+
+  1. Consider time-varying λ(t) for trend analysis
+  2. Apply formal goodness-of-fit tests (Chi-square)
+  3. Compare with Negative Binomial if over-dispersion detected
+
+======================================================================
+STEP 9: ANALYSIS SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                   POISSON DISTRIBUTION RESULTS                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  Poisson Parameter (λ_MLE):              216.39                     │
+│  Expected Value E[X]:                    216.39                     │
+│  Variance Var(X):                        216.39                     │
+│  Standard Deviation σ:                    14.71                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  Sample Mean:                            216.39                     │
+│  Sample Variance:                       1583.05                     │
+│  Variance/Mean Ratio:                    7.3158                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  Model Validation:                     PASSED ✓                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+======================================================================
+END OF POISSON DISTRIBUTION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================
