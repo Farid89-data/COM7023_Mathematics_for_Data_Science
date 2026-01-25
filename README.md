@@ -1,6 +1,6 @@
-<div align="center", bold>
-COM7023 Mathematics for Data Science
-</div>
+
+# COM7023 Mathematics for Data Science
+
 
 <div align="center">
 
