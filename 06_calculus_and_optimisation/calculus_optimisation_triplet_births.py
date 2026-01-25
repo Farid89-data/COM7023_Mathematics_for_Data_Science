@@ -35,6 +35,7 @@ Available at: https://www.twinbirths.org/en/data-metadata/
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,6 +49,9 @@ from scipy.optimize import minimize, curve_fit
 pd.set_option('display.max_columns', None)
 plt.style.use('seaborn-v0_8-whitegrid')
 np.set_printoptions(precision=4, suppress=True)
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # HEADER INFORMATION
@@ -74,7 +78,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING AND PREPARING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/FRA_InputData_25.11.2024.xlsx'
+file_path = os.path.join(script_dir, '../datasets/FRA_InputData_25.11.2024.xlsx')
 
 try:
     df = pd.read_excel(file_path, sheet_name='input data')
@@ -208,7 +212,7 @@ print("    ∫ f(x)dx ≈ (h/3) × [f(x₀) + 4f(x₁) + 2f(x₂) + ... + f(xₙ
 cumulative_trapezoidal = integrate.cumulative_trapezoid(triplets, years, initial=0)
 
 # Total integral using different methods
-total_trapezoidal = np.trapz(triplets, years)
+total_trapezoidal = np.trapezoid(triplets, years)
 total_simpson = integrate.simpson(triplets, x=years)
 
 print("\n--- Cumulative Triplet Deliveries Over Time ---")
@@ -552,7 +556,10 @@ ax4.legend(loc='upper right')
 ax4.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/calculus_optimisation_triplet_births.png',
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/calculus_optimisation_triplet_births.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

@@ -35,6 +35,7 @@ Available at: https://www.twinbirths.org/en/data-metadata/
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,6 +49,9 @@ warnings.filterwarnings('ignore')
 
 pd.set_option('display.max_columns', None)
 plt.style.use('seaborn-v0_8-whitegrid')
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(precision=4, suppress=True)
 
 # =============================================================================
@@ -75,7 +79,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING AND PREPARING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/FRA_InputData_25.11.2024.xlsx'
+file_path = os.path.join(script_dir, '../datasets/FRA_InputData_25.11.2024.xlsx')
 
 try:
     df = pd.read_excel(file_path, sheet_name='input data')
@@ -615,7 +619,10 @@ ax4.set_title(f'Q-Q Plot for Normality\nShapiro-Wilk p = {p_shapiro:.4f}',
 ax4.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/hypothesis_testing_triplet_births.png',
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/hypothesis_testing_triplet_births.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

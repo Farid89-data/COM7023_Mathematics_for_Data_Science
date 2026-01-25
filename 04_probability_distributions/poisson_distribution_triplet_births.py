@@ -35,11 +35,12 @@ Available at: https://www.twinbirths.org/en/data-metadata/
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from math import factorial, exp
+from math import factorial, exp, log
 
 # =============================================================================
 # CONFIGURATION
@@ -73,7 +74,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING AND PREPARING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/FRA_InputData_25.11.2024.xlsx'
+file_path = os.path.join(os.path.dirname(__file__), '../datasets/FRA_InputData_25.11.2024.xlsx')
 
 try:
     df = pd.read_excel(file_path, sheet_name='input data')
@@ -241,7 +242,16 @@ def poisson_pmf(k, lam):
     """
     if k < 0:
         return 0.0
-    return (lam ** k) * exp(-lam) / factorial(int(k))
+    if k == 0:
+        return exp(-lam)
+    
+    # Use log probabilities for numerical stability
+    try:
+        log_pmf = k * log(lam) - lam - sum(log(i) for i in range(1, int(k) + 1))
+        return exp(log_pmf)
+    except (ValueError, OverflowError):
+        # For very large k, probability is essentially 0
+        return 0.0
 
 def poisson_cdf(k, lam):
     """
@@ -423,7 +433,7 @@ plt.suptitle('Poisson Distribution Analysis: Triplet Births in France\n' +
              'Source: Human Multiple Births Database (2024)', 
              fontsize=13, fontweight='bold', y=1.02)
 plt.tight_layout()
-plt.savefig('../outputs/figures/poisson_distribution_triplet_births.png',
+plt.savefig(os.path.join(os.path.dirname(__file__), '../outputs/figures/poisson_distribution_triplet_births.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

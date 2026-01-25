@@ -27,6 +27,7 @@ Arden University.
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -43,6 +44,9 @@ pd.set_option('display.max_colwidth', 50)
 
 # Set plotting style
 plt.style.use('seaborn-v0_8-whitegrid')
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # HEADER INFORMATION
@@ -70,7 +74,7 @@ print("STEP 1: LOADING THE DATASET")
 print("=" * 70)
 
 # Define the file path
-file_path = '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv'
+file_path = os.path.join(script_dir, '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv')
 
 # Load the CSV file using pandas
 # The read_csv function automatically detects the delimiter and encoding
@@ -215,7 +219,10 @@ ax2.set_title('Data Completeness Matrix', fontsize=12, fontweight='bold')
 ax2.set_xticklabels(ax2.get_xticklabels(), rotation=45, ha='right')
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/data_loading_marking_matrix.png', 
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/data_loading_marking_matrix.png'), 
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

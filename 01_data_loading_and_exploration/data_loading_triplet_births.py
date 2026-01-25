@@ -28,6 +28,7 @@ Available at: https://www.twinbirths.org/en/data-metadata/
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -43,6 +44,9 @@ pd.set_option('display.width', None)
 
 # Set plotting style
 plt.style.use('seaborn-v0_8-whitegrid')
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # HEADER INFORMATION
@@ -70,7 +74,7 @@ print("STEP 1: LOADING THE DATASET")
 print("=" * 70)
 
 # Define the file path
-file_path = '../datasets/FRA_InputData_25.11.2024.xlsx'
+file_path = os.path.join(script_dir, '../datasets/FRA_InputData_25.11.2024.xlsx')
 
 # Load the Excel file using pandas
 # We specify the sheet name as 'input data' based on the dataset structure
@@ -265,7 +269,10 @@ ax4.set_ylabel('Rows', fontsize=11)
 ax4.set_title('Missing Data Pattern (First 50 Rows)', fontsize=12, fontweight='bold')
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/data_loading_triplet_births.png', 
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/data_loading_triplet_births.png'), 
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

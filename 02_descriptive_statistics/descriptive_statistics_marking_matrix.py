@@ -33,6 +33,7 @@ Arden University.
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -44,6 +45,9 @@ import seaborn as sns
 
 pd.set_option('display.max_columns', None)
 plt.style.use('seaborn-v0_8-whitegrid')
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # HEADER INFORMATION
@@ -70,7 +74,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv'
+file_path = os.path.join(os.path.dirname(__file__), '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv')
 
 try:
     df = pd.read_csv(file_path, encoding='utf-8-sig')
@@ -361,7 +365,10 @@ ax4.plot(x_line, p(x_line), 'r--', linewidth=2, label='Trend Line')
 ax4.legend()
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/descriptive_statistics_marking_matrix.png',
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/descriptive_statistics_marking_matrix.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

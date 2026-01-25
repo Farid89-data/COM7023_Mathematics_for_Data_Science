@@ -35,6 +35,7 @@ Available at: https://www.twinbirths.org/en/data-metadata/
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -73,7 +74,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING AND PREPARING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/FRA_InputData_25.11.2024.xlsx'
+file_path = os.path.join(os.path.dirname(__file__), '../datasets/FRA_InputData_25.11.2024.xlsx')
 
 try:
     df = pd.read_excel(file_path, sheet_name='input data')
@@ -584,7 +585,7 @@ ax4.legend(loc='upper left')
 ax4_twin.legend(loc='upper right')
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/linear_algebra_triplet_births.png',
+plt.savefig(os.path.join(os.path.dirname(__file__), '../outputs/figures/linear_algebra_triplet_births.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

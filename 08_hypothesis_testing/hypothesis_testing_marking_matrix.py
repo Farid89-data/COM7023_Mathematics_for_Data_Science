@@ -35,6 +35,7 @@ Arden University.
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -49,6 +50,9 @@ warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)
 plt.style.use('seaborn-v0_8-whitegrid')
 np.set_printoptions(precision=4, suppress=True)
+
+# Define script directory for relative paths
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # =============================================================================
 # HEADER INFORMATION
@@ -75,7 +79,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING AND PREPARING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv'
+file_path = os.path.join(script_dir, '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv')
 
 try:
     df = pd.read_csv(file_path, encoding='utf-8-sig')
@@ -635,7 +639,10 @@ ax4.legend(loc='upper right')
 ax4.grid(True, alpha=0.3, axis='x')
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/hypothesis_testing_marking_matrix.png',
+# Ensure output directory exists
+output_dir = os.path.join(script_dir, '../outputs/figures')
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(script_dir, '../outputs/figures/hypothesis_testing_marking_matrix.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 

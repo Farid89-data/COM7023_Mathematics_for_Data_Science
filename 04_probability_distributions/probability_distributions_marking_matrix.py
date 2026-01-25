@@ -34,6 +34,7 @@ Arden University.
 # IMPORT REQUIRED LIBRARIES
 # =============================================================================
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -72,7 +73,7 @@ print("\n" + "=" * 70)
 print("STEP 1: LOADING THE DATASET")
 print("=" * 70)
 
-file_path = '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv'
+file_path = os.path.join(os.path.dirname(__file__), '../datasets/COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv')
 
 try:
     df = pd.read_csv(file_path, encoding='utf-8-sig')
@@ -357,7 +358,7 @@ ax4.set_title(f'Expected Value Calculation\nE[G] = Σ(x × P(x)) = {expected_gra
 ax4.grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
-plt.savefig('../outputs/figures/probability_distributions_marking_matrix.png',
+plt.savefig(os.path.join(os.path.dirname(__file__), '../outputs/figures/probability_distributions_marking_matrix.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.show()
 
