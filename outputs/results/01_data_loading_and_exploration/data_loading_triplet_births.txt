@@ -1,0 +1,187 @@
+======================================================================
+DATA LOADING AND EXPLORATION
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+File path: /home/codespace/COM7023_Mathematics_for_Data_Science/01_data_loading_and_exploration/../datasets/FRA_InputData_25.11.2024.xlsx
+Sheet name: input data
+
+======================================================================
+STEP 2: UNDERSTANDING DATA STRUCTURE
+======================================================================
+
+--- Dataset Dimensions ---
+Number of rows: 166
+Number of columns: 18
+Total cells: 2988
+
+--- Column Names ---
+  1. Country
+  2. Source
+  3. Year
+  4. Stillbirths
+  5. Singletons
+  6. Twin_deliveries
+  7. Twin_children
+  8. Triplet_deliveries
+  9. Triplet_children
+  10. Quadruplet_plus_deliveries
+  11. Quadruplet_plus_children
+  12. Multiple_deliveries
+  13. Multiple_children
+  14. Total_deliveries
+  15. Total_children
+  16. Twinning_rate
+  17. Multiple_rate
+  18. Footnotes
+
+--- Data Types ---
+Country                           str
+Source                            str
+Year                            int64
+Stillbirths                   float64
+Singletons                    float64
+Twin_deliveries               float64
+Twin_children                 float64
+Triplet_deliveries            float64
+Triplet_children              float64
+Quadruplet_plus_deliveries    float64
+Quadruplet_plus_children      float64
+Multiple_deliveries           float64
+Multiple_children             float64
+Total_deliveries              float64
+Total_children                float64
+Twinning_rate                 float64
+Multiple_rate                 float64
+Footnotes                      object
+dtype: object
+
+======================================================================
+STEP 3: DATA PREVIEW
+======================================================================
+
+--- First 10 Rows ---
+  Country     Source  Year  Stillbirths  Singletons  Twin_deliveries  Twin_children  Triplet_deliveries  Triplet_children  Quadruplet_plus_deliveries  Quadruplet_plus_children  Multiple_deliveries  Multiple_children  Total_deliveries  Total_children  Twinning_rate  Multiple_rate Footnotes
+0  France  SGF-INSEE  1858          1.0    993039.0           9791.0        19582.0               158.0             474.0                         0.0                       0.0               9949.0            20056.0         1002988.0       1013095.0            NaN            NaN         1
+1  France  SGF-INSEE  1859          1.0   1042043.0          11005.0        22010.0               121.0             363.0                         0.0                       0.0              11126.0            22373.0         1053169.0       1064416.0            NaN            NaN         1
+2  France  SGF-INSEE  1860          1.0    980887.0           9943.0        19886.0               132.0             396.0                         1.0                       4.0              10076.0            20286.0          990963.0       1001173.0            NaN            NaN         1
+3  France  SGF-INSEE  1861          1.0   1028139.0          10782.0        21564.0               133.0             399.0                         0.0                       0.0              10915.0            21963.0         1039054.0       1050102.0            NaN            NaN       NaN
+4  France  SGF-INSEE  1862          1.0   1019290.0          10214.0        20428.0               120.0             360.0                         1.0                       4.0              10335.0            20792.0         1029625.0       1040082.0            NaN            NaN       NaN
+5  France  SGF-INSEE  1863          1.0   1036624.0          10642.0        21284.0               113.0             339.0                         0.0                       0.0              10755.0            21623.0         1047379.0       1058247.0            NaN            NaN       NaN
+6  France  SGF-INSEE  1864          1.0   1030739.0          10718.0        21436.0               114.0             342.0                         1.0                       4.0              10833.0            21782.0         1041572.0       1052521.0            NaN            NaN       NaN
+7  France  SGF-INSEE  1865          1.0   1031092.0          10634.0        21268.0               114.0             342.0                         1.0                       4.0              10749.0            21614.0         1041841.0       1052706.0            NaN            NaN       NaN
+8  France  SGF-INSEE  1866          1.0   1033201.0          10225.0        20450.0               103.0             309.0                         0.0                       0.0              10328.0            20759.0         1043529.0       1053960.0            NaN            NaN       NaN
+9  France  SGF-INSEE  1867          1.0   1030067.0           9976.0        19952.0               108.0             324.0                         1.0                       5.0              10085.0            20281.0         1040152.0       1050348.0            NaN            NaN       NaN
+
+--- Last 5 Rows ---
+    Country Source  Year  Stillbirths  Singletons  Twin_deliveries  Twin_children  Triplet_deliveries  Triplet_children  Quadruplet_plus_deliveries  Quadruplet_plus_children  Multiple_deliveries  Multiple_children  Total_deliveries  Total_children  Twinning_rate  Multiple_rate Footnotes
+161  France  INSEE  2019          1.0    698223.0          11443.0        22886.0               181.0             543.0                         4.0                      17.0              11628.0            23446.0          709851.0        721669.0           16.1            NaN        11
+162  France  INSEE  2020          1.0    682533.0          10835.0        21670.0               149.0             447.0                         5.0                      22.0              10989.0            22139.0          693522.0        704672.0           15.6            NaN        11
+163  France  INSEE  2021          1.0    688040.0          10868.0        21736.0               159.0             477.0                         7.0                      28.0              11034.0            22241.0          699074.0        710281.0           15.5            NaN       NaN
+164  France  INSEE  2022          1.0    672789.0          10768.0        21536.0               141.0             423.0                         7.0                      30.0              10916.0            21989.0          683705.0        694778.0           15.7            NaN        10
+165  France  INSEE  2023          1.0    627499.0           9863.0        19726.0               130.0             390.0                         5.0                      20.0               9998.0            20136.0          637497.0        647635.0           15.5            NaN        10
+
+======================================================================
+STEP 4: DATA QUALITY ASSESSMENT
+======================================================================
+
+--- Missing Values per Column ---
+  Source: 3 (1.8%)
+  Stillbirths: 3 (1.8%)
+  Singletons: 3 (1.8%)
+  Twin_deliveries: 10 (6.0%)
+  Twin_children: 10 (6.0%)
+  Triplet_deliveries: 10 (6.0%)
+  Triplet_children: 10 (6.0%)
+  Quadruplet_plus_deliveries: 10 (6.0%)
+  Quadruplet_plus_children: 10 (6.0%)
+  Multiple_deliveries: 4 (2.4%)
+  Multiple_children: 11 (6.6%)
+  Total_deliveries: 4 (2.4%)
+  Total_children: 3 (1.8%)
+  Twinning_rate: 69 (41.6%)
+  Multiple_rate: 166 (100.0%)
+  Footnotes: 96 (57.8%)
+
+Total missing values: 422
+
+--- Duplicate Rows ---
+Number of duplicate rows: 0
+
+--- Year Range ---
+Earliest year: 1858
+Latest year: 2023
+Number of years with data: 166
+
+======================================================================
+STEP 5: BASIC STATISTICAL SUMMARY
+======================================================================
+
+--- Numeric Columns Summary ---
+              Year  Stillbirths    Singletons  Twin_deliveries  Twin_children  Triplet_deliveries  Triplet_children  Quadruplet_plus_deliveries  Quadruplet_plus_children  Multiple_deliveries  Multiple_children  Total_deliveries  Total_children  Twinning_rate  Multiple_rate
+count   166.000000        163.0  1.630000e+02       156.000000     156.000000          156.000000        156.000000                  156.000000                156.000000           162.000000         155.000000      1.620000e+02    1.630000e+02      97.000000            0.0
+mean   1940.500000          1.0  7.955576e+05      9255.820513   18511.641026          119.621795        358.865385                    3.487179                 14.262821          9245.024691       18899.238710      8.041497e+05    8.145935e+05      12.170103            NaN
+std      48.064193          0.0  1.331340e+05      1748.144969    3496.289938           62.359452        187.078355                    4.865265                 20.073771          1872.351983        3612.155534      1.341197e+05    1.352550e+05       2.629843            NaN
+min    1858.000000          1.0  3.204540e+05      4019.000000    8038.000000           38.000000        114.000000                    0.000000                  0.000000          4065.000000        8177.000000      3.245190e+05    3.286310e+05       8.900000            NaN
+25%    1899.250000          1.0  7.391590e+05      8273.500000   16547.000000           77.000000        231.000000                    0.000000                  0.000000          8303.000000       17014.500000      7.467338e+05    7.548625e+05      10.400000            NaN
+50%    1940.500000          1.0  7.907460e+05      9178.000000   18356.000000           91.000000        273.000000                    1.000000                  4.000000          9238.000000       18664.000000      7.976300e+05    8.094460e+05      10.800000            NaN
+75%    1981.750000          1.0  8.695040e+05      9865.750000   19731.500000          149.250000        447.750000                    5.000000                 20.000000          9943.500000       20117.500000      8.784172e+05    8.883075e+05      14.900000            NaN
+max    2023.000000          1.0  1.042043e+06     13853.000000   27706.000000          334.000000       1002.000000                   21.000000                 89.000000         14100.000000       28464.000000      1.053169e+06    1.064416e+06      17.500000            NaN
+
+--- Triplet Deliveries Statistics ---
+  Count: 156
+  Mean: 119.62
+  Median: 91.00
+  Standard Deviation: 62.36
+  Minimum: 38
+  Maximum: 334
+  Range: 296
+
+======================================================================
+STEP 6: DATA CLEANING
+======================================================================
+
+--- Data Cleaning Results ---
+  Original rows: 166
+  After removing missing values: 156
+  After filtering years (1990-2020): 31
+
+======================================================================
+STEP 7: DATA VISUALISATION
+======================================================================
+
+Visualisation saved: data_loading_triplet_births.png
+
+======================================================================
+STEP 8: KEY FINDINGS SUMMARY
+======================================================================
+
+--- Summary ---
+  1. Dataset spans from 1858 to 2023
+  2. Analysis period filtered to 1990-2020 (31 years)
+  3. Average triplet births: 216.4 per year
+  4. Data shows temporal patterns suitable for time series analysis
+  5. Dataset is suitable for Poisson distribution modelling
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+======================================================================
+END OF DATA LOADING AND EXPLORATION
+Student: Farid Negahbnai (24154844)
+======================================================================

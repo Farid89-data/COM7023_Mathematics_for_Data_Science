@@ -1,0 +1,384 @@
+======================================================================
+LINEAR ALGEBRA
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+Source: Human Multiple Births Database (2024)
+
+Analysis Period: 1990 - 2020
+Number of Observations: n = 31 years
+
+--- Dataset Preview ---
+ Year  Triplet_deliveries  Total_births  Twin_deliveries
+ 1990               317.0 770891.308462     15682.343560
+ 1991               314.0 761045.213521     15884.333942
+ 1992               256.0 752443.394496     12693.971137
+ 1993               271.0 761548.662442     13623.875624
+ 1994               244.0 767435.173697     12095.200682
+ 1995               212.0 738587.623799     10619.522981
+ 1996               229.0 731111.592363     11493.499752
+ 1997               263.0 743736.799352     13216.179999
+ 1998               240.0 763922.078279     11880.854091
+ 1999               209.0 750425.173880     10426.824778
+
+======================================================================
+STEP 2: VECTORS AS TIME SERIES
+======================================================================
+
+--- Representing Time Series as Vectors ---
+
+  In linear algebra, a time series can be represented as a vector:
+
+       ┌ x₁ ┐     ┌ x₁₉₉₀ ┐
+  x =  │ x₂ │  =  │ x₁₉₉₁ │   where xₜ is the value at time t
+       │ ⋮  │     │   ⋮   │
+       └ xₙ ┘     └ x₂₀₂₀ ┘
+
+--- Time Series Vectors ---
+
+  Years vector (t):
+  t = [1990, 1991, ..., 2020]ᵀ  ∈ ℝ^31
+
+  Triplet deliveries vector (x):
+  x = [317, 314, ..., 149]ᵀ  ∈ ℝ^31
+
+  Twin deliveries vector (y):
+  y = [15682, 15884, ..., 7628]ᵀ  ∈ ℝ^31
+
+======================================================================
+STEP 3: VECTOR OPERATIONS ON TIME SERIES
+======================================================================
+
+--------------------------------------------------
+3.1 MEAN VECTOR (CENTERING)
+--------------------------------------------------
+
+  Mean-centering: x̃ = x - μx1
+  where 1 is a vector of ones
+
+  Mean of triplets: μₓ = 216.39
+  Mean of twins: μᵧ = 10818.26
+
+  Centered triplet vector (first 5 values):
+  x̃ = [100.61, 97.61, 39.61, 54.61, 27.61...]
+
+  Verification: mean(x̃) = 0.0000000000 ≈ 0
+
+--------------------------------------------------
+3.2 DOT PRODUCT AND CORRELATION
+--------------------------------------------------
+
+  The dot product of centered vectors relates to covariance:
+
+  Cov(X,Y) = (x̃ · ỹ) / (n-1) = (Σ x̃ᵢỹᵢ) / (n-1)
+
+  x̃ · ỹ = Σ x̃ᵢỹᵢ = 2352705.45
+  Cov(X,Y) = 2352705.45 / 30 = 78423.5151
+
+--- Correlation Coefficient ---
+
+  Pearson correlation:
+  r = (x̃ · ỹ) / (||x̃|| × ||ỹ||)
+
+  ||x̃|| = 217.9251
+  ||ỹ|| = 10806.0605
+  r = 2352705.45 / (217.9251 × 10806.0605)
+  r = 0.999063
+
+  Verification (numpy): r = 0.999063
+
+  Interpretation: Strong  positive correlation
+
+======================================================================
+STEP 4: DESIGN MATRIX FOR LINEAR REGRESSION
+======================================================================
+
+--- Linear Regression Model ---
+
+  Model: y = Xβ + ε
+
+  where:
+  - y is the response vector (n × 1)
+  - X is the design matrix (n × p)
+  - β is the coefficient vector (p × 1)
+  - ε is the error vector (n × 1)
+
+--- Constructing the Design Matrix ---
+
+  For simple linear regression with intercept:
+
+       ┌ 1   x₁ ┐
+  X =  │ 1   x₂ │
+       │ ⋮    ⋮ │
+       └ 1   xₙ ┘
+
+  Design matrix X (first 5 rows):
+  Shape: (31, 2) (n × p where p=2)
+
+  X = 
+    [1  -15.0000]
+    [1  -14.0000]
+    [1  -13.0000]
+    [1  -12.0000]
+    [1  -11.0000]
+    ...
+
+======================================================================
+STEP 5: SOLVING NORMAL EQUATIONS
+======================================================================
+
+--- Normal Equations ---
+
+  The least squares solution minimizes ||y - Xβ||²
+
+  Solution: β = (XᵀX)⁻¹Xᵀy
+
+  Normal equations: XᵀXβ = Xᵀy
+
+  Step 1: Compute XᵀX
+  XᵀX = 
+    [   31.0000      0.0000]
+    [    0.0000   2480.0000]
+
+  Step 2: Compute Xᵀy
+  Xᵀy = 
+    [ 6708.0000]
+    [-9311.0000]
+
+  Step 3: Solve (XᵀX)β = Xᵀy for β
+  det(XᵀX) = 76880.0000
+
+  (XᵀX)⁻¹ = 
+    [  0.03225806    0.00000000]
+    [  0.00000000    0.00040323]
+
+  β = (XᵀX)⁻¹Xᵀy = 
+    [β₀]   [  216.3871]   (intercept)
+    [β₁] = [   -3.7544]   (slope)
+
+--- Regression Equation ---
+
+  ŷ = 216.3871 + -3.7544 × (year - 2005)
+
+  In original units:
+  ŷ = -7311.2560 + -3.7544 × year
+
+======================================================================
+STEP 6: PROJECTION MATRIX (HAT MATRIX)
+======================================================================
+
+--- Hat Matrix Definition ---
+
+  H = X(XᵀX)⁻¹Xᵀ
+
+  Properties:
+  - H projects y onto the column space of X
+  - ŷ = Hy (fitted values)
+  - H is symmetric: Hᵀ = H
+  - H is idempotent: H² = H
+  - trace(H) = p (number of parameters)
+
+  Shape of H: (31, 31)
+
+  Hat matrix H (first 5×5 block):
+    [0.1230  0.1169  0.1109  0.1048  0.0988]
+    [0.1169  0.1113  0.1056  0.1000  0.0944]
+    [0.1109  0.1056  0.1004  0.0952  0.0899]
+    [0.1048  0.1000  0.0952  0.0903  0.0855]
+    [0.0988  0.0944  0.0899  0.0855  0.0810]
+    ...
+
+--- Verifying Hat Matrix Properties ---
+
+  Symmetric (H = Hᵀ): True
+  Idempotent (H² = H): True
+  trace(H) = 2.0000 (should equal p = 2)
+
+--- Fitted Values: ŷ = Hy ---
+
+  Year    Actual    Fitted    Residual
+  ---------------------------------------------
+  1990       317     272.7      +44.3
+  1991       314     268.9      +45.1
+  1992       256     265.2       -9.2
+  1993       271     261.4       +9.6
+  1994       244     257.7      -13.7
+  1995       212     253.9      -41.9
+  1996       229     250.2      -21.2
+  1997       263     246.4      +16.6
+  1998       240     242.7       -2.7
+  1999       209     238.9      -29.9
+  ...
+
+======================================================================
+STEP 7: COVARIANCE MATRIX ANALYSIS
+======================================================================
+
+--- Multi-variable Data Matrix ---
+
+  Create data matrix with multiple birth variables:
+
+  Data matrix Z (first 5 rows):
+  Shape: (31, 3)
+
+    Year    Triplets       Twins    Total(k)
+  --------------------------------------------------
+    1990         317       15682       770.9
+    1991         314       15884       761.0
+    1992         256       12694       752.4
+    1993         271       13624       761.5
+    1994         244       12095       767.4
+  ...
+
+--- Covariance Matrix Calculation ---
+
+  Formula: Σ = (1/(n-1)) × (Z - Z̄)ᵀ(Z - Z̄)
+
+  Covariance Matrix Σ:
+
+                    Triplets         Twins      Total(k)
+  -------------------------------------------------------
+      Triplets       1583.05      78423.52        105.19
+         Twins      78423.52    3892364.75       5170.48
+     Total (k)        105.19       5170.48        303.57
+
+--- Interpretation ---
+
+  Variance(Triplets) = 1583.05
+  Variance(Twins) = 3892364.75
+  Cov(Triplets, Twins) = 78423.52
+
+======================================================================
+STEP 8: CORRELATION MATRIX
+======================================================================
+
+--- Correlation Matrix Calculation ---
+
+  Formula: R = D⁻¹ΣD⁻¹
+  where D = diag(√σ₁₁, √σ₂₂, ...)
+
+  Correlation Matrix R:
+
+                    Triplets         Twins      Total(k)
+  -------------------------------------------------------
+      Triplets        1.0000        0.9991        0.1517
+         Twins        0.9991        1.0000        0.1504
+     Total (k)        0.1517        0.1504        1.0000
+
+--- Interpretation ---
+  Corr(Triplets, Twins) = 0.9991 [Strong positive]
+  Corr(Triplets, Total (k)) = 0.1517 [Weak positive]
+  Corr(Twins, Total (k)) = 0.1504 [Weak positive]
+
+======================================================================
+STEP 9: EIGENVALUE DECOMPOSITION
+======================================================================
+
+--- Eigendecomposition of Covariance Matrix ---
+
+  Σ = VΛVᵀ
+  where:
+  - V contains eigenvectors (columns)
+  - Λ is diagonal matrix of eigenvalues
+
+--- Eigenvalues ---
+
+  Eigenvalues (sorted descending):
+    λ1 = 3893951.6984
+    λ2 = 296.7012
+    λ3 = 2.9604
+
+  Sum of eigenvalues = 3894251.3600
+  trace(Σ) = 3894251.3600
+  (These should be equal: True)
+
+--- Eigenvectors (Principal Components) ---
+
+                         PC1           PC2           PC3
+  -------------------------------------------------------
+      Triplets        0.0201        0.0034        0.9998
+         Twins        0.9998       -0.0014       -0.0201
+     Total (k)        0.0013        1.0000       -0.0035
+
+--- Variance Explained ---
+  PC1: 99.99% (cumulative: 99.99%)
+  PC2: 0.01% (cumulative: 100.00%)
+  PC3: 0.00% (cumulative: 100.00%)
+
+--- Interpretation ---
+
+  Principal Component 1 captures the dominant direction of variation
+  in the data. This is used in PCA for dimensionality reduction.
+
+======================================================================
+STEP 10: VISUALISATION
+======================================================================
+
+Visualisation saved: linear_algebra_triplet_births.png
+
+======================================================================
+STEP 11: APPLICATIONS IN DATA SCIENCE
+======================================================================
+
+--- 1. Linear Regression ---
+
+  Normal equations: β = (XᵀX)⁻¹Xᵀy
+  Estimated coefficients:
+    β₀ (intercept) = 216.3871
+    β₁ (slope)     = -3.7544
+  R² = 1 - SS_res/SS_tot = 0.7361
+
+--- 2. Principal Component Analysis ---
+
+  PC1 explains 100.0% of total variance
+  PC1 + PC2 explain 100.0% of total variance
+
+--- 3. Covariance Analysis ---
+
+  Strongest correlation: Triplets-Twins (r = 0.9991)
+  This suggests related demographic trends
+
+======================================================================
+STEP 12: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                   LINEAR ALGEBRA SUMMARY                             │
+├─────────────────────────────────────────────────────────────────────┤
+│  Time Series Length:         n =   31 years                         │
+│  Design Matrix Shape:        X =  31 × 2                           │
+│  Covariance Matrix Shape:    Σ =   3 × 3                           │
+├─────────────────────────────────────────────────────────────────────┤
+│  Regression R²:                0.7361                             │
+│  Slope (β₁):                  -3.7544                             │
+├─────────────────────────────────────────────────────────────────────┤
+│  Dominant Eigenvalue (λ₁):   3893951.70                             │
+│  Variance by PC1:              99.99%                             │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+--- Further Reading ---
+  Strang, G. (2016) Introduction to Linear Algebra. 5th edn.
+  Wellesley-Cambridge Press.
+
+======================================================================
+END OF LINEAR ALGEBRA ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

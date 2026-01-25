@@ -118,6 +118,7 @@ COM7023_Mathematics_for_Data_Science/
 │   └── README.md
 │
 └── outputs/
+    ├──results/
     └── figures/
 ```
 ### Step 2: Create Virtual Environment

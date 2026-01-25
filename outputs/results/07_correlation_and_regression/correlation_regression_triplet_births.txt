@@ -1,0 +1,245 @@
+======================================================================
+CORRELATION AND REGRESSION
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Analysis Period: 1970 - 2020
+Number of Observations: n = 51 years
+
+--- Dataset Preview ---
+    Year      Triplets
+-------------------------
+    1970            80
+    1971            74
+    1972            82
+    1973            83
+    1974            89
+    1975            87
+    1976           106
+    1977           113
+    1978           119
+    1979           146
+...
+
+======================================================================
+STEP 2: EXPLORATORY CORRELATION ANALYSIS
+======================================================================
+
+--- Year-Triplets Correlation ---
+
+  Pearson Correlation:
+    r = 0.431068
+    p-value = 1.588862e-03
+
+  Spearman Correlation:
+    ρ = 0.411305
+    p-value = 2.713801e-03
+
+--- Interpretation ---
+    There is a moderate positive correlation between year and triplet births
+
+======================================================================
+STEP 3: SIMPLE LINEAR REGRESSION
+======================================================================
+
+--- Model: Triplets = β₀ + β₁ × Year + ε ---
+
+  Regression Coefficients:
+    Intercept (β̂₀) = -3453.5986
+    Slope (β̂₁) = 1.825068
+
+  Regression Equation:
+    Triplets = -3453.60 + 1.8251 × Year
+
+  Model Fit Statistics:
+    R² = 0.185820
+    Adjusted R² = 0.169204
+    RMSE = 56.2327
+    Standard Error of Slope = 0.545752
+
+  Hypothesis Test (H₀: β₁ = 0):
+    t-statistic = 3.3441
+    p-value = 1.588862e-03
+
+--- Predictions ---
+
+      Year    Predicted Triplets
+  -----------------------------------
+      2025                   242
+      2030                   251
+      2035                   260
+
+======================================================================
+STEP 4: POLYNOMIAL REGRESSION
+======================================================================
+
+--- Why Polynomial Regression? ---
+
+  Linear models may not capture complex trends.
+  Polynomial regression extends the linear model:
+    y = β₀ + β₁x + β₂x² + β₃x³ + ... + βₚxᵖ
+
+--- Model Comparison ---
+  ----------------------------------------------------------------------
+    Degree          R²      Adj R²        RMSE           AIC           BIC
+  ----------------------------------------------------------------------
+         1    0.185820    0.169204       56.23        415.01        418.87
+         2    0.718716    0.706996       33.05        362.81        368.60
+         3    0.723792    0.706162       32.75        363.88        371.60
+         4    0.771942    0.752111       29.76        356.11        365.77
+
+--- Best Model Selection ---
+    Best by Adjusted R²: Degree 4
+    Best by AIC: Degree 4
+    Best by BIC: Degree 4
+
+======================================================================
+STEP 5: QUADRATIC REGRESSION ANALYSIS
+======================================================================
+
+--- Model: Triplets = β₀ + β₁(Year - μ) + β₂(Year - μ)² ---
+
+  Coefficients (with centered years):
+    β₂ (quadratic) = -0.234890
+    β₁ (linear) = 1.825068
+    β₀ (intercept) = 238.304537
+
+--- Critical Point (Vertex) ---
+    Vertex x (centered) = 3.88
+    Vertex Year = 1998.9
+    Vertex y (predicted triplets) = 242
+
+    Since β₂ < 0, the parabola opens downward
+    Maximum triplet births occurred around 1999
+
+--- Model Quality ---
+    R² = 0.718716
+    Adjusted R² = 0.706996
+    RMSE = 33.05
+
+======================================================================
+STEP 6: RESIDUAL DIAGNOSTICS
+======================================================================
+
+--- Residual Summary ---
+    Mean: 0.000000 (should be ≈ 0)
+    Std Dev: 33.0523
+    Min: -58.5796
+    Max: 115.1019
+
+--- Normality Test (Shapiro-Wilk) ---
+    W-statistic = 0.887765
+    p-value = 0.000168
+    Conclusion: Residuals may not be normally distributed (p ≤ 0.05)
+
+--- Autocorrelation Test (Durbin-Watson) ---
+    DW statistic = 0.5357
+    Interpretation:
+      DW ≈ 2: No autocorrelation
+      DW < 2: Positive autocorrelation
+      DW > 2: Negative autocorrelation
+    Conclusion: Potential autocorrelation in residuals
+
+======================================================================
+STEP 7: CONFIDENCE AND PREDICTION INTERVALS
+======================================================================
+
+--- Understanding Intervals ---
+
+  Confidence Interval: Range for the mean response
+  Prediction Interval: Range for an individual observation
+  Prediction intervals are always wider than confidence intervals
+
+--- Linear Model Intervals ---
+  ----------------------------------------------------------------------
+    Year    Prediction                95% CI                95% PI
+  ----------------------------------------------------------------------
+    2000           197  [     179,      214]  [      80,      313]
+    2010           215  [     192,      238]  [      97,      332]
+    2020           233  [     201,      265]  [     113,      353]
+
+======================================================================
+STEP 8: MODEL SELECTION CRITERIA
+======================================================================
+
+--- Information Criteria ---
+
+  AIC (Akaike Information Criterion):
+    AIC = n × ln(SSE/n) + 2k
+    Balances fit quality with model complexity
+    Lower is better
+
+  BIC (Bayesian Information Criterion):
+    BIC = n × ln(SSE/n) + k × ln(n)
+    Stronger penalty for model complexity than AIC
+    Lower is better
+
+--- Comparison Summary ---
+  ---------------------------------------------
+        Criterion      Best Degree         Value
+  ---------------------------------------------
+      Adjusted R²                4      0.752111
+              AIC                4        356.11
+              BIC                4        365.77
+
+--- Recommendation ---
+    Based on BIC (most conservative), recommend: Degree 4
+    This model captures the main trend while avoiding overfitting
+
+======================================================================
+STEP 9: VISUALISATION
+======================================================================
+
+Visualisation saved: correlation_regression_triplet_births.png
+
+======================================================================
+STEP 10: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│               CORRELATION AND REGRESSION SUMMARY                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  CORRELATION                                                         │
+│    Pearson r:                             0.431068                │
+│    Spearman ρ:                            0.411305                │
+├─────────────────────────────────────────────────────────────────────┤
+│  LINEAR REGRESSION                                                   │
+│    Equation: Triplets = -3453.6 + 1.825 × Year                  │
+│    R²:                                    0.185820                │
+├─────────────────────────────────────────────────────────────────────┤
+│  QUADRATIC REGRESSION                                                │
+│    Peak Year (vertex):                        1999                    │
+│    Peak Triplets:                              242                    │
+│    R²:                                    0.718716                │
+├─────────────────────────────────────────────────────────────────────┤
+│  MODEL SELECTION                                                     │
+│    Best Model (BIC):                    Degree    4                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+--- Further Reading ---
+  Freedman, D.A. (2009) Statistical Models: Theory and Practice.
+  Cambridge University Press.
+
+======================================================================
+END OF CORRELATION AND REGRESSION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

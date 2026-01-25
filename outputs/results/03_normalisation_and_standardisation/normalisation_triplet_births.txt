@@ -1,0 +1,256 @@
+@Farid89-data ➜ ~/COM7023_Mathematics_for_Data_Science (main) $ ^C
+
+@Farid89-data ➜ ~/COM7023_Mathematics_for_Data_Science (main) $  cd /home/codespace/COM7023_Mathematics_for_Data_Science ; /usr/bin/env /home/codespace/.python/current/bin/python /home/codespace/.vscode-remote/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher 52721 -- /home/codespace/COM7023_Mathematics_for_Data_Science/03_normalisation_and_standardisation/normalisation_triplet_births.py 
+======================================================================
+NORMALISATION AND STANDARDISATION
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Analysis period: 1990 - 2020
+Number of observations: 31
+
+--- Original Data Statistics ---
+  Mean: 216.39
+  Std:  39.14
+  Min:  149
+  Max:  317
+
+======================================================================
+STEP 2: MIN-MAX NORMALISATION
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_norm = (x - x_min) / (x_max - x_min)
+
+  Properties:
+  - Scales data to [0, 1] range
+  - Preserves relative distances
+  - Sensitive to outliers
+
+--- Step-by-step Calculation ---
+
+  1. Find minimum value:
+     x_min = 149
+
+  2. Find maximum value:
+     x_max = 317
+
+  3. Calculate range:
+     range = x_max - x_min = 317 - 149 = 168
+
+  4. Apply formula to each value:
+
+     Year    Original    Calculation                    Normalised
+     -----------------------------------------------------------------
+     1990       317      (317 - 149) / 168              1.0000
+     1991       314      (314 - 149) / 168              0.9821
+     1992       256      (256 - 149) / 168              0.6369
+     1993       271      (271 - 149) / 168              0.7262
+     1994       244      (244 - 149) / 168              0.5655
+     ...
+
+  5. Verification:
+     Normalised minimum: 0.0000 (should be 0)
+     Normalised maximum: 1.0000 (should be 1)
+
+======================================================================
+STEP 3: Z-SCORE STANDARDISATION
+======================================================================
+
+--- Mathematical Formula ---
+
+  z = (x - μ) / σ
+
+  Properties:
+  - Transforms to mean = 0, std = 1
+  - Values represent standard deviations from mean
+  - Useful for comparing different distributions
+
+--- Step-by-step Calculation ---
+
+  1. Calculate mean (μ):
+     μ = Σxᵢ / n = 6708 / 31 = 216.39
+
+  2. Calculate standard deviation (σ):
+     σ = √[Σ(xᵢ - μ)² / n] = 39.14
+
+  3. Apply formula to each value:
+
+     Year    Original    Deviation     Z-Score    Interpretation
+     ----------------------------------------------------------------------
+     1990       317      +100.61      +2.5706   2.57σ above mean
+     1991       314       +97.61      +2.4939   2.49σ above mean
+     1992       256       +39.61      +1.0121   1.01σ above mean
+     1993       271       +54.61      +1.3953   1.40σ above mean
+     1994       244       +27.61      +0.7055   0.71σ above mean
+     ...
+
+  4. Verification:
+     Mean of z-scores: 0.0000000000 (should be ≈ 0)
+     Std of z-scores:  1.0000000000 (should be ≈ 1)
+
+  5. Z-Score Interpretation:
+     |z| < 1:   Within 1 standard deviation (typical value)
+     |z| ≈ 2:   Within 2 standard deviations (unusual)
+     |z| > 3:   Beyond 3 standard deviations (potential outlier)
+
+======================================================================
+STEP 4: LOG TRANSFORMATION
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_log = log₁₀(x)  or  x_log = ln(x)
+
+  Properties:
+  - Reduces right skewness
+  - Handles multiplicative relationships
+  - Requires positive values
+
+--- Step-by-step Calculation ---
+
+     Year    Original    log₁₀(x)     ln(x)
+     --------------------------------------------------
+     1990       317      2.5011      5.7589
+     1991       314      2.4969      5.7494
+     1992       256      2.4082      5.5452
+     1993       271      2.4330      5.6021
+     1994       244      2.3874      5.4972
+     ...
+
+  Original data:
+    Mean: 216.39, Std: 39.14
+
+  Log₁₀ transformed:
+    Mean: 2.3284, Std: 0.0763
+
+  Natural log transformed:
+    Mean: 5.3614, Std: 0.1757
+
+======================================================================
+STEP 5: ROBUST SCALING
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_robust = (x - median) / IQR
+
+  where IQR = Q3 - Q1
+
+  Properties:
+  - Resistant to outliers
+  - Uses median instead of mean
+  - Uses IQR instead of standard deviation
+
+--- Step-by-step Calculation ---
+
+  1. Calculate median:
+     median = 211.00
+
+  2. Calculate quartiles:
+     Q1 = 190.50
+     Q3 = 232.00
+
+  3. Calculate IQR:
+     IQR = Q3 - Q1 = 232.00 - 190.50 = 41.50
+
+  4. Apply formula:
+
+     Year    Original    (x - median)    Robust Scaled
+     -------------------------------------------------------
+     1990       317        +106.00        +2.5542
+     1991       314        +103.00        +2.4819
+     1992       256         +45.00        +1.0843
+     1993       271         +60.00        +1.4458
+     1994       244         +33.00        +0.7952
+     ...
+
+======================================================================
+STEP 6: COMPARISON OF NORMALISATION METHODS
+======================================================================
+
+--- Comparison Table (First 10 Years) ---
+ Year  Original  Min-Max   Z-Score    Log10    Robust
+ 1990     317.0 1.000000  2.570557 2.501059  2.554217
+ 1991     314.0 0.982143  2.493910 2.496930  2.481928
+ 1992     256.0 0.636905  1.012069 2.408240  1.084337
+ 1993     271.0 0.726190  1.395304 2.432969  1.445783
+ 1994     244.0 0.565476  0.705482 2.387390  0.795181
+ 1995     212.0 0.375000 -0.112086 2.326336  0.024096
+ 1996     229.0 0.476190  0.322247 2.359835  0.433735
+ 1997     263.0 0.678571  1.190912 2.419956  1.253012
+ 1998     240.0 0.541667  0.603286 2.380211  0.698795
+ 1999     209.0 0.357143 -0.188733 2.320146 -0.048193
+
+--- Summary Statistics After Each Transformation ---
+         Original    Min-Max       Z-Score      Log10     Robust
+count   31.000000  31.000000  3.100000e+01  31.000000  31.000000
+mean   216.387097   0.401114  2.936719e-16   2.328428   0.129810
+std     39.787500   0.236830  1.016530e+00   0.077580   0.958735
+min    149.000000   0.000000 -1.721672e+00   2.173186  -1.493976
+25%    190.500000   0.247024 -6.613889e-01   2.279858  -0.493976
+50%    211.000000   0.369048 -1.376348e-01   2.324282   0.000000
+75%    232.000000   0.494048  3.988938e-01   2.365484   0.506024
+max    317.000000   1.000000  2.570557e+00   2.501059   2.554217
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+/home/codespace/COM7023_Mathematics_for_Data_Science/03_normalisation_and_standardisation/normalisation_triplet_births.py:361: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp = ax6.boxplot(data_list, labels=methods, patch_artist=True)
+
+Visualisation saved: normalisation_triplet_births.png
+
+======================================================================
+STEP 8: PRACTICAL RECOMMENDATIONS
+======================================================================
+
+--- When to Use Each Method ---
+
+  Min-Max Normalisation:
+    ✓ Neural networks and deep learning
+    ✓ Image processing (pixel values)
+    ✓ When bounded range is required
+    ✗ Sensitive to outliers
+
+  Z-Score Standardisation:
+    ✓ PCA, clustering, linear regression
+    ✓ When comparing variables with different units
+    ✓ Algorithms assuming normal distribution
+    ✗ May produce unbounded values
+
+  Log Transformation:
+    ✓ Right-skewed distributions
+    ✓ Multiplicative relationships
+    ✓ Variance stabilisation
+    ✗ Only for positive values
+
+  Robust Scaling:
+    ✓ Data with outliers
+    ✓ Non-normal distributions
+    ✓ When median is more representative than mean
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+======================================================================
+END OF NORMALISATION AND STANDARDISATION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

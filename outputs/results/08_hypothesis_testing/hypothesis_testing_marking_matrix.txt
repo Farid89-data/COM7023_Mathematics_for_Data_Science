@@ -1,0 +1,363 @@
+======================================================================
+HYPOTHESIS TESTING
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Number of Learning Outcomes: 4
+Number of Grade Bands: 9
+
+Word Counts Matrix Shape: (4, 9)
+
+======================================================================
+STEP 2: HYPOTHESIS TESTING FRAMEWORK
+======================================================================
+
+--- The Scientific Method ---
+
+  1. State the null hypothesis (H₀) and alternative hypothesis (H₁)
+  2. Choose significance level (α)
+  3. Collect data and calculate test statistic
+  4. Compute p-value or compare to critical value
+  5. Make decision: reject or fail to reject H₀
+
+--- Key Definitions ---
+
+  Null Hypothesis (H₀): Statement of 'no effect' or 'no difference'
+  Alternative Hypothesis (H₁): Statement we want to provide evidence for
+  Significance Level (α): Probability of Type I error (usually 0.05)
+  P-value: Probability of observing data as extreme or more, given H₀ is true
+
+--- Decision Rule ---
+
+  If p-value < α: Reject H₀ (statistically significant)
+  If p-value ≥ α: Fail to reject H₀ (not statistically significant)
+
+--- Types of Errors ---
+
+  Type I Error (False Positive): Reject H₀ when H₀ is true
+    Probability = α
+
+  Type II Error (False Negative): Fail to reject H₀ when H₀ is false
+    Probability = β
+    Power = 1 - β (probability of correctly rejecting false H₀)
+
+======================================================================
+STEP 3: ONE-SAMPLE T-TEST
+======================================================================
+
+--- When to Use ---
+  - Testing if a sample mean differs from a known value
+  - Population standard deviation is unknown
+  - Data is approximately normally distributed
+
+--- Test Statistic ---
+
+           x̄ - μ₀
+    t = ─────────────
+          s / √n
+
+  Degrees of freedom: df = n - 1
+
+--- Example: Testing if High Grade Band Descriptions Average 30 Words ---
+
+  H₀: μ = 30 (mean word count is 30)
+  H₁: μ ≠ 30 (mean word count is not 30)
+  α = 0.05 (two-tailed test)
+
+--- Calculation ---
+  Sample size: n = 8
+  Sample mean: x̄ = 29.3750
+  Sample std dev: s = 17.5168
+  Hypothesized mean: μ₀ = 30
+
+  t = (29.3750 - 30) / (17.5168 / √8)
+  t = -0.6250 / 6.1931
+  t = -0.1009
+
+  Degrees of freedom: df = 7
+  P-value (two-tailed) = 0.922445
+
+  Critical value (α/2 = 0.025): t_crit = ±2.3646
+
+--- Verification (scipy.stats.ttest_1samp) ---
+  t-statistic = -0.1009
+  p-value = 0.922445
+
+--- Decision (α = 0.05) ---
+  P-value (0.922445) ≥ α (0.05)
+  Fail to reject H₀: Insufficient evidence mean differs from 30
+
+======================================================================
+STEP 4: TWO-SAMPLE T-TEST (INDEPENDENT SAMPLES)
+======================================================================
+
+--- When to Use ---
+  - Comparing means of two independent groups
+  - Testing if there's a significant difference between groups
+
+--- Test Statistic (Equal Variances) ---
+
+           x̄₁ - x̄₂
+    t = ──────────────────────
+        sp × √(1/n₁ + 1/n₂)
+
+  where sp is the pooled standard deviation
+
+--- Example: Comparing High vs Low Grade Band Word Counts ---
+
+  H₀: μ_high = μ_low (no difference in mean word counts)
+  H₁: μ_high ≠ μ_low (difference exists)
+  α = 0.05
+
+--- Sample Statistics ---
+  High Grade Bands (90-100, 80-90):
+    n₁ = 8
+    x̄₁ = 29.3750
+    s₁ = 17.5168
+
+  Low Grade Bands (30-39, 20-29, 0-19):
+    n₂ = 12
+    x̄₂ = 38.7500
+    s₂ = 14.6171
+
+--- Levene's Test for Equal Variances ---
+  F-statistic = 0.0026
+  p-value = 0.9601
+  Equal variances assumed: True
+
+--- Two-Sample t-Test Results ---
+  t-statistic = -1.2993
+  p-value = 0.210234
+
+--- Decision (α = 0.05) ---
+  P-value (0.210234) ≥ α (0.05)
+  Fail to reject H₀: No significant difference detected
+
+--- Effect Size (Cohen's d) ---
+  d = -0.5931
+  Interpretation: Medium effect
+
+======================================================================
+STEP 5: PAIRED T-TEST
+======================================================================
+
+--- When to Use ---
+  - Comparing two measurements on the same subjects
+  - Before-after comparisons
+  - Matched pairs design
+
+--- Test Statistic ---
+
+           d̄
+    t = ─────────
+        sd / √n
+
+  where d̄ is the mean of differences
+
+--- Example: Comparing Adjacent Grade Bands (90-100 vs 80-90) ---
+
+  H₀: μ_d = 0 (no difference between adjacent grade descriptions)
+  H₁: μ_d ≠ 0 (difference exists)
+
+--- Difference Statistics ---
+  Differences: [-12 -32 -49 -12]
+  Mean difference (d̄) = -26.2500
+  Std of differences (sd) = 17.8582
+  Number of pairs (n) = 4
+
+--- Calculation ---
+  t = -26.2500 / (17.8582 / √4)
+  t = -2.9398
+  df = 3
+  p-value = 0.060519
+
+--- Verification (scipy.stats.ttest_rel) ---
+  t-statistic = -2.9398
+  p-value = 0.060519
+
+======================================================================
+STEP 6: CHI-SQUARE TEST
+======================================================================
+
+--- Chi-Square Goodness of Fit Test ---
+
+  Tests if observed frequencies match expected frequencies
+
+  Test Statistic:
+              (Oᵢ - Eᵢ)²
+    χ² = Σ  ─────────────
+               Eᵢ
+
+--- Example: Testing if Word Count Categories are Equally Distributed ---
+
+  H₀: Word counts are equally distributed across categories
+  H₁: Word counts are not equally distributed
+
+--- Observed Frequencies ---
+    Low: 6
+    Medium: 14
+    High: 16
+
+--- Expected Frequencies (under H₀) ---
+    Low: 12.00
+    Medium: 12.00
+    High: 12.00
+
+--- Calculation ---
+  χ² = Σ (Oᵢ - Eᵢ)² / Eᵢ
+    Category 1: (6 - 12.00)² / 12.00 = 3.0000
+    Category 2: (14 - 12.00)² / 12.00 = 0.3333
+    Category 3: (16 - 12.00)² / 12.00 = 1.3333
+  χ² = 4.6667
+  df = 2
+  p-value = 0.096972
+
+--- Verification (scipy.stats.chisquare) ---
+  χ² = 4.6667
+  p-value = 0.096972
+
+======================================================================
+STEP 7: CONFIDENCE INTERVALS
+======================================================================
+
+--- Definition ---
+
+  A confidence interval provides a range of plausible values for a
+  population parameter. A 95% CI means: if we repeated the sampling
+  many times, 95% of the intervals would contain the true parameter.
+
+--- Formula for Mean (σ unknown) ---
+
+            s
+  x̄ ± t_α/2 × ───
+            √n
+
+--- 95% Confidence Interval for High Grade Word Counts ---
+
+  Sample Statistics:
+    n = 8
+    x̄ = 29.3750
+    s = 17.5168
+    SE = s/√n = 6.1931
+
+  Critical Value:
+    t_0.025,7 = 2.3646
+
+  Confidence Interval:
+    CI = 29.3750 ± 2.3646 × 6.1931
+    CI = 29.3750 ± 14.6444
+    CI = [14.7306, 44.0194]
+
+  Interpretation:
+    We are 95% confident that the true mean word count for high
+    grade bands is between 14.73 and 44.02
+
+--- Confidence Intervals at Different Levels ---
+     Level    t-critical      Margin                   Interval
+  ------------------------------------------------------------
+       90%        1.8946     11.7334  [17.6416, 41.1084]
+       95%        2.3646     14.6444  [14.7306, 44.0194]
+       99%        3.4995     21.6728  [7.7022, 51.0478]
+
+======================================================================
+STEP 8: NON-PARAMETRIC TESTS
+======================================================================
+
+--- When to Use Non-Parametric Tests ---
+  - Data is not normally distributed
+  - Small sample sizes
+  - Ordinal or ranked data
+  - Outliers present
+
+--------------------------------------------------
+8.1 MANN-WHITNEY U TEST
+--------------------------------------------------
+
+  Non-parametric alternative to independent samples t-test
+  Tests if one distribution is stochastically greater than the other
+
+  Comparing High vs Low Grade Bands:
+    U-statistic = 30.5000
+    p-value = 0.188829
+    Result: No significant difference detected
+
+--------------------------------------------------
+8.2 WILCOXON SIGNED-RANK TEST
+--------------------------------------------------
+
+  Non-parametric alternative to paired t-test
+  Tests if the median difference is zero
+
+  Comparing Adjacent Grade Bands (90-100 vs 80-90):
+    W-statistic = 0.0000
+    p-value = 0.125000
+    Result: No significant difference in medians
+
+--------------------------------------------------
+8.3 KRUSKAL-WALLIS TEST
+--------------------------------------------------
+
+  Non-parametric alternative to one-way ANOVA
+  Tests if multiple independent samples have the same distribution
+
+  Comparing Three Grade Categories:
+    H-statistic = 2.0964
+    p-value = 0.350568
+    Result: No significant differences among groups
+
+======================================================================
+STEP 9: VISUALISATION
+======================================================================
+
+Visualisation saved: hypothesis_testing_marking_matrix.png
+
+======================================================================
+STEP 10: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                    HYPOTHESIS TESTING SUMMARY                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  ONE-SAMPLE T-TEST (H₀: μ = 30)                                      │
+│    t-statistic:                            -0.1009                    │
+│    p-value:                               0.922445                │
+│    Decision:                       Fail to Reject              │
+├─────────────────────────────────────────────────────────────────────┤
+│  TWO-SAMPLE T-TEST (High vs Low Grades)                              │
+│    t-statistic:                            -1.2993                    │
+│    p-value:                               0.210234                │
+│    Cohen's d:                              -0.5931                    │
+├─────────────────────────────────────────────────────────────────────┤
+│  CHI-SQUARE TEST (Equal Distribution)                                │
+│    χ²-statistic:                            4.6667                    │
+│    p-value:                               0.096972                │
+├─────────────────────────────────────────────────────────────────────┤
+│  95% CONFIDENCE INTERVAL                                             │
+│    Mean ± Margin:                   [ 14.73,  44.02]              │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+--- Further Reading ---
+  Wasserman, L. (2004) All of Statistics. Springer.
+
+======================================================================
+END OF HYPOTHESIS TESTING ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

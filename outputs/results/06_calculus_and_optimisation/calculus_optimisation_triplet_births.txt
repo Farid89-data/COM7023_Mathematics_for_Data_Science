@@ -1,0 +1,348 @@
+======================================================================
+CALCULUS AND OPTIMISATION
+Dataset: Triplet Births (France)
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Analysis Period: 1970 - 2020
+Number of Observations: n = 51 years
+
+--- Dataset Preview ---
+    Year      Triplets
+-------------------------
+    1970            80
+    1971            74
+    1972            82
+    1973            83
+    1974            89
+    1975            87
+    1976           106
+    1977           113
+    1978           119
+    1979           146
+...
+
+======================================================================
+STEP 2: NUMERICAL DIFFERENTIATION - RATE OF CHANGE
+======================================================================
+
+--- Discrete Derivative Approximation ---
+
+  For discrete data points, we approximate the derivative using
+  finite differences:
+
+  Forward difference: f'(xᵢ) ≈ [f(xᵢ₊₁) - f(xᵢ)] / (xᵢ₊₁ - xᵢ)
+  Central difference: f'(xᵢ) ≈ [f(xᵢ₊₁) - f(xᵢ₋₁)] / (xᵢ₊₁ - xᵢ₋₁)
+
+--- Rate of Change (Forward Difference) ---
+
+      Year      Triplets    Rate of Change
+  ---------------------------------------------
+      1970            80             -6.00 per year
+      1971            74              8.00 per year
+      1972            82              1.00 per year
+      1973            83              6.00 per year
+      1974            89             -2.00 per year
+      1975            87             19.00 per year
+      1976           106              7.00 per year
+      1977           113              6.00 per year
+      1978           119             27.00 per year
+      1979           146            -11.00 per year
+  ...
+
+--- Key Findings ---
+
+  Maximum Increase:
+    Year: 1988 → 1989
+    Change: 263 → 334
+    Rate: +71.00 triplet deliveries per year
+
+  Maximum Decrease:
+    Year: 1991 → 1992
+    Change: 314 → 256
+    Rate: -58.00 triplet deliveries per year
+
+======================================================================
+STEP 3: SECOND DERIVATIVE - ACCELERATION
+======================================================================
+
+--- Second Derivative Approximation ---
+
+  The second derivative measures how the rate of change is changing:
+  f''(x) ≈ [f'(xᵢ₊₁) - f'(xᵢ)] / h
+
+  Interpretation:
+    f''(x) > 0: Rate of change is increasing (accelerating)
+    f''(x) < 0: Rate of change is decreasing (decelerating)
+
+--- Acceleration of Triplet Births ---
+
+      Year    First Derivative   Second Derivative
+  -------------------------------------------------------
+      1971               -6.00               14.00
+      1972                8.00               -7.00
+      1973                1.00                5.00
+      1974                6.00               -8.00
+      1975               -2.00               21.00
+      1976               19.00              -12.00
+      1977                7.00               -1.00
+      1978                6.00               21.00
+      1979               27.00              -38.00
+      1980              -11.00               35.00
+  ...
+
+--- Inflection Points (Change in Trend Direction) ---
+    Year 1971: Trend changed from  accelerating to  decelerating
+    Year 1972: Trend changed from  decelerating to  accelerating
+    Year 1973: Trend changed from  accelerating to  decelerating
+    Year 1974: Trend changed from  decelerating to  accelerating
+    Year 1975: Trend changed from  accelerating to  decelerating
+
+======================================================================
+STEP 4: NUMERICAL INTEGRATION - CUMULATIVE BIRTHS
+======================================================================
+
+--- Numerical Integration Methods ---
+
+  For discrete data, we use numerical integration methods:
+
+  Trapezoidal Rule:
+    ∫ f(x)dx ≈ (h/2) × [f(x₀) + 2f(x₁) + ... + 2f(xₙ₋₁) + f(xₙ)]
+
+  Simpson's Rule:
+    ∫ f(x)dx ≈ (h/3) × [f(x₀) + 4f(x₁) + 2f(x₂) + ... + f(xₙ)]
+
+--- Cumulative Triplet Deliveries Over Time ---
+
+      Year        Annual       Cumulative
+  ---------------------------------------------
+      1970            80                0
+      1975            87              412
+      1980           135             1006
+      1985           167             1726
+      1990           317             2968
+      1995           212             4318
+      2000           211             5470
+      2005           231             6570
+      2010           231             7594
+      2015           179             8588
+      2020           149             9444
+
+--- Total Integration Results ---
+
+  Period: 1970 - 2020
+  Trapezoidal Rule: 9,444 delivery-years
+  Simpson's Rule:   9,452 delivery-years
+
+  Note: These represent the 'area under the curve' of annual
+  triplet deliveries over time, a measure of cumulative impact.
+
+  Average Annual Deliveries: 189
+
+======================================================================
+STEP 5: COST FUNCTION FOR REGRESSION
+======================================================================
+
+--- Mean Squared Error (MSE) Cost Function ---
+
+  For linear regression y = mx + b, the cost function is:
+
+         1   n
+  J(m,b) = ─── Σ (yᵢ - (mxᵢ + b))²
+          2n i=1
+
+  Goal: Find m and b that minimise J(m,b)
+
+  Initial Parameters:
+    m (slope) = 0
+    b (intercept) = 187.41
+    Initial Cost J(m,b) = 1941.91
+
+======================================================================
+STEP 6: GRADIENT DESCENT FOR LINEAR REGRESSION
+======================================================================
+
+--- Gradient Descent Update Rules ---
+
+  m := m - α × ∂J/∂m
+  b := b - α × ∂J/∂b
+
+  where:
+    ∂J/∂m = (1/n) Σ (ŷᵢ - yᵢ) × xᵢ
+    ∂J/∂b = (1/n) Σ (ŷᵢ - yᵢ)
+
+  Gradient Descent Parameters:
+    Learning Rate (α): 0.0001
+    Iterations: 10000
+
+  Convergence History:
+  -------------------------------------------------------
+   Iteration     Slope (m)   Intercept (b)          Cost
+  -------------------------------------------------------
+           0        0.0000          187.41       1941.91
+           1        0.0395          187.41       1926.44
+          10        0.3590          187.41       1813.90
+         100        1.6209          187.41       1585.58
+        1000        1.8251          187.41       1581.06
+        5000        1.8251          187.41       1581.06
+       10000        1.8251          187.41       1581.06
+
+  Final Result:
+    m* = 1.825068
+    b* = 187.411765
+    Final Cost = 1581.0609
+
+  In Original Units:
+    ŷ = 1.8251x + 3828.4222
+    (where x is the year)
+
+======================================================================
+STEP 7: ANALYTICAL SOLUTION COMPARISON
+======================================================================
+
+--- Normal Equations Solution ---
+
+  The closed-form solution is:
+    m = Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²
+    b = ȳ - m × x̄
+
+  Analytical Solution:
+    m = 1.825068
+    b = 187.411765
+
+  Gradient Descent Solution:
+    m = 1.825068
+    b = 187.411765
+
+  Comparison:
+    Difference in m: 0.000000
+    Difference in b: 0.000000
+
+======================================================================
+STEP 8: POLYNOMIAL CURVE FITTING
+======================================================================
+
+--- Higher Degree Polynomials ---
+
+  Linear regression may not capture complex trends.
+  We can fit higher-degree polynomials:
+    y = a₀ + a₁x + a₂x² + a₃x³ + ...
+
+--- Polynomial Fit Comparison ---
+  ------------------------------------------------------------
+
+  Degree 1 Polynomial:
+    R² = 0.185820
+    MSE = 3162.12
+    Coefficients: [  1.8251 187.4118]
+
+  Degree 2 Polynomial:
+    R² = 0.718716
+    MSE = 1092.45
+    Coefficients: [ -0.2349   1.8251 238.3045]
+
+  Degree 3 Polynomial:
+    R² = 0.723792
+    MSE = 1072.74
+    Coefficients: [  0.0018  -0.2349   1.1328 238.3045]
+
+  Degree 4 Polynomial:
+    R² = 0.771942
+    MSE = 885.73
+    Coefficients: [  0.0004   0.0018  -0.4725   1.1328 253.7187]
+
+  Best Fit (by R²): Degree 4
+    R² = 0.771942
+
+======================================================================
+STEP 9: OPTIMISATION WITH SCIPY
+======================================================================
+
+--- Using scipy.optimize.minimize ---
+
+  SciPy provides advanced optimisation algorithms:
+    - BFGS (Broyden–Fletcher–Goldfarb–Shanno)
+    - L-BFGS-B (Limited-memory BFGS with bounds)
+    - Nelder-Mead (Simplex method)
+
+  Optimisation Results:
+  -----------------------------------------------------------------
+
+  Method: Nelder-Mead
+    m = 1.825072
+    b = 187.411816
+    Final Cost = 1581.060874
+    Iterations = 66
+    Success = True
+
+  Method: BFGS
+    m = 1.825068
+    b = 187.411765
+    Final Cost = 1581.060874
+    Iterations = 5
+    Success = True
+
+  Method: L-BFGS-B
+    m = 1.825068
+    b = 187.411765
+    Final Cost = 1581.060874
+    Iterations = 3
+    Success = True
+
+======================================================================
+STEP 10: VISUALISATION
+======================================================================
+
+Visualisation saved: calculus_optimisation_triplet_births.png
+
+======================================================================
+STEP 11: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│              CALCULUS AND OPTIMISATION SUMMARY                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  DIFFERENTIATION                                                     │
+│    Maximum Rate Increase:   +71.00 (Year 1988)      │
+│    Maximum Rate Decrease:   -58.00 (Year 1991)      │
+├─────────────────────────────────────────────────────────────────────┤
+│  INTEGRATION                                                         │
+│    Total (Trapezoidal):        9,444 delivery-years             │
+│    Average Annual:               189 deliveries                   │
+├─────────────────────────────────────────────────────────────────────┤
+│  GRADIENT DESCENT                                                    │
+│    Final Slope (m):         1.825068                              │
+│    Final Intercept (b):       187.41                              │
+│    Final Cost:             1581.0609                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  POLYNOMIAL FITTING                                                  │
+│    Best Degree:                    4                              │
+│    Best R²:                 0.771942                              │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Human Multiple Births Database (2024) FRA_InputData_25.11.2024.xlsx.
+  Available at: https://www.twinbirths.org/en/data-metadata/
+  (Accessed: 25 November 2024).
+
+--- Further Reading ---
+  Stewart, J. (2015) Calculus: Early Transcendentals. 8th edn.
+  Cengage Learning.
+
+======================================================================
+END OF CALCULUS AND OPTIMISATION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

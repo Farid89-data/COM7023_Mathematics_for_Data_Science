@@ -1,0 +1,209 @@
+======================================================================
+NORMALISATION AND STANDARDISATION
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING DATA AND CREATING FEATURES
+======================================================================
+
+Dataset loaded successfully!
+
+Created feature dataset with 36 observations
+
+--- Original Data Statistics ---
+       Grade_Midpoint  Word_Count  Character_Count
+count       36.000000   36.000000         36.00000
+mean        54.055556   38.138889        303.00000
+std         27.242241   16.099961        121.91988
+min          9.500000   12.000000        115.00000
+25%         34.500000   24.000000        188.50000
+50%         54.500000   32.000000        265.50000
+75%         74.500000   54.000000        407.75000
+max         95.000000   65.000000        504.00000
+
+======================================================================
+STEP 2: MIN-MAX NORMALISATION
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_norm = (x - x_min) / (x_max - x_min)
+
+  This scales all values to the range [0, 1]
+  - Minimum value maps to 0
+  - Maximum value maps to 1
+
+--- Word Count Normalisation ---
+
+  Step-by-step calculation:
+  x_min = 12
+  x_max = 65
+
+  Example: For x = 16
+  x_norm = (16 - 12) / (65 - 12)
+  x_norm = 4 / 53
+  x_norm = 0.0755
+
+  Original range: [12, 65]
+  Normalised range: [0.0000, 1.0000]
+
+======================================================================
+STEP 3: Z-SCORE STANDARDISATION
+======================================================================
+
+--- Mathematical Formula ---
+
+  z = (x - μ) / σ
+
+  where:
+  μ = population mean
+  σ = population standard deviation
+
+  This transforms data to have:
+  - Mean = 0
+  - Standard deviation = 1
+
+--- Word Count Standardisation ---
+
+  Step-by-step calculation:
+  μ = 38.1389
+  σ = 15.8748
+
+  Example: For x = 16
+  z = (16 - 38.1389) / 15.8748
+  z = -22.1389 / 15.8748
+  z = -1.3946
+
+  Verification:
+  Mean of z-scores: 0.0000000000 (should be ≈ 0)
+  Std of z-scores: 1.0000000000 (should be ≈ 1)
+
+======================================================================
+STEP 4: DECIMAL SCALING
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_scaled = x / 10^j
+
+  where j is the smallest integer such that max(|x_scaled|) < 1
+
+--- Character Count Decimal Scaling ---
+
+  Step-by-step calculation:
+  max(|x|) = 504
+  j = ceil(log₁₀(504)) = 3
+
+  Example: For x = 151
+  x_scaled = 151 / 10^3
+  x_scaled = 151 / 1000
+  x_scaled = 0.151000
+
+  Scaled range: [0.115000, 0.504000]
+
+======================================================================
+STEP 5: ROBUST SCALING (MEDIAN AND IQR)
+======================================================================
+
+--- Mathematical Formula ---
+
+  x_robust = (x - median) / IQR
+
+  where:
+  median = Q2 (50th percentile)
+  IQR = Q3 - Q1 (interquartile range)
+
+  This method is robust to outliers
+
+--- Word Count Robust Scaling ---
+
+  Step-by-step calculation:
+  median = 32.00
+  Q1 = 24.00
+  Q3 = 54.00
+  IQR = 30.00
+
+  Example: For x = 16
+  x_robust = (16 - 32.00) / 30.00
+  x_robust = -0.5333
+
+======================================================================
+STEP 6: COMPARISON OF NORMALISATION METHODS
+======================================================================
+
+--- First 10 Observations ---
+   Original  Min-Max [0,1]   Z-Score    Robust
+0        16       0.075472 -1.394595 -0.533333
+1        28       0.301887 -0.638679 -0.133333
+2        24       0.226415 -0.890651 -0.266667
+3        29       0.320755 -0.575686 -0.100000
+4        22       0.188679 -1.016637 -0.333333
+5        18       0.113208 -1.268609 -0.466667
+6        18       0.113208 -1.268609 -0.466667
+7        23       0.207547 -0.953644 -0.300000
+8        24       0.226415 -0.890651 -0.266667
+9        18       0.113208 -1.268609 -0.466667
+
+--- Summary Statistics After Transformation ---
+        Original  Min-Max [0,1]       Z-Score     Robust
+count  36.000000      36.000000  3.600000e+01  36.000000
+mean   38.138889       0.493187  1.912051e-16   0.204630
+std    16.099961       0.303773  1.014185e+00   0.536665
+min    12.000000       0.000000 -1.646567e+00  -0.666667
+25%    24.000000       0.226415 -8.906513e-01  -0.266667
+50%    32.000000       0.377358 -3.867071e-01   0.000000
+75%    54.000000       0.792453  9.991393e-01   0.733333
+max    65.000000       1.000000  1.692062e+00   1.100000
+
+======================================================================
+STEP 7: VISUALISATION
+======================================================================
+/home/codespace/COM7023_Mathematics_for_Data_Science/03_normalisation_and_standardisation/normalisation_marking_matrix.py:379: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp = ax4.boxplot(data_to_plot, labels=['Original', 'Min-Max (×100)', 'Z-Score'],
+
+Visualisation saved: normalisation_marking_matrix.png
+
+======================================================================
+STEP 8: WHEN TO USE EACH METHOD
+======================================================================
+
+--- Min-Max Normalisation ---
+  Use when:
+  - You need values in a specific range [0, 1]
+  - Data does not have significant outliers
+  - For neural networks and image processing
+
+--- Z-Score Standardisation ---
+  Use when:
+  - Data is approximately normally distributed
+  - For algorithms assuming normal distribution (e.g., PCA, LDA)
+  - When comparing variables with different units
+
+--- Decimal Scaling ---
+  Use when:
+  - You need simple, reversible transformation
+  - Data has consistent order of magnitude
+
+--- Robust Scaling ---
+  Use when:
+  - Data contains outliers
+  - Distribution is not normal
+  - More resistant to extreme values
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+======================================================================
+END OF NORMALISATION AND STANDARDISATION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================

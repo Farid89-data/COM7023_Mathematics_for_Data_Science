@@ -1,0 +1,388 @@
+======================================================================
+CALCULUS AND OPTIMISATION
+Dataset: Marking Matrix
+======================================================================
+
+Module Title:       Maths for Data Science
+Module Code:        COM7023
+Student Number:     24154844
+Student Name:       Farid Negahbnai
+Tutor Name:         Ali Vaisifard
+University:         Arden University
+======================================================================
+
+======================================================================
+STEP 1: LOADING AND PREPARING THE DATASET
+======================================================================
+
+Dataset loaded successfully!
+
+Number of Learning Outcomes: 4
+Number of Grade Bands: 9
+Complexity Scores: [202 430 473 268]
+
+======================================================================
+STEP 2: LIMITS - THE FOUNDATION OF CALCULUS
+======================================================================
+
+--- What is a Limit? ---
+
+  A limit describes the value a function approaches as the input
+  approaches a particular value:
+
+                    lim f(x) = L
+                   x → a
+
+  This is read as: 'the limit of f(x) as x approaches a equals L'
+
+--- Numerical Demonstration ---
+
+  Consider the function f(x) = (x² - 1) / (x - 1)
+  This is undefined at x = 1, but we can find the limit:
+
+  Approaching x = 1 from the left:
+  ----------------------------------------
+    f(0.9) = 1.900000
+    f(0.99) = 1.990000
+    f(0.999) = 1.999000
+    f(0.9999) = 1.999900
+    f(0.99999) = 1.999990
+
+  Approaching x = 1 from the right:
+  ----------------------------------------
+    f(1.1) = 2.100000
+    f(1.01) = 2.010000
+    f(1.001) = 2.001000
+    f(1.0001) = 2.000100
+    f(1.00001) = 2.000010
+
+  Conclusion: lim(x→1) (x² - 1)/(x - 1) = 2
+
+  Algebraically: (x² - 1)/(x - 1) = (x+1)(x-1)/(x-1) = x + 1
+                 At x = 1: x + 1 = 2 ✓
+
+======================================================================
+STEP 3: DERIVATIVES - RATE OF CHANGE
+======================================================================
+
+--- Definition of the Derivative ---
+
+  The derivative is defined as the limit of the difference quotient:
+
+            f(x + h) - f(x)
+  f'(x) = lim ─────────────────
+          h→0        h
+
+--- Numerical Differentiation ---
+
+  We can approximate derivatives numerically using finite differences:
+
+  Forward difference:  f'(x) ≈ [f(x+h) - f(x)] / h
+  Central difference:  f'(x) ≈ [f(x+h) - f(x-h)] / (2h)
+
+--- Example: Grade Distribution Function ---
+
+  f(x) = 0.001x² - 0.1x + 10  (where x is grade percentage)
+  f'(x) = 0.002x - 0.1
+
+  Comparing Analytical and Numerical Derivatives:
+  -------------------------------------------------------
+     Grade (x)          f(x)    f'(x) Analytical     f'(x) Numerical
+  -------------------------------------------------------
+            20        8.4000           -0.060000           -0.060000
+            40        7.6000           -0.020000           -0.020000
+            50        7.5000            0.000000            0.000000
+            60        7.6000            0.020000            0.020000
+            80        8.4000            0.060000            0.060000
+           100       10.0000            0.100000            0.100000
+
+======================================================================
+STEP 4: DIFFERENTIATION RULES
+======================================================================
+
+--------------------------------------------------
+4.1 POWER RULE
+--------------------------------------------------
+
+  Rule: d/dx[xⁿ] = n·xⁿ⁻¹
+
+  Examples:
+    d/dx[x²] = 2x
+    d/dx[x³] = 3x²
+    d/dx[x⁻¹] = -x⁻²
+    d/dx[√x] = d/dx[x^(1/2)] = (1/2)x^(-1/2)
+
+  Application to grade midpoints (as power function):
+  If f(x) = x², then f'(x) = 2x
+    At x = 95.0: f'(95.0) = 2 × 95.0 = 190.0
+    At x = 85.0: f'(85.0) = 2 × 85.0 = 170.0
+    At x = 74.5: f'(74.5) = 2 × 74.5 = 149.0
+    At x = 64.5: f'(64.5) = 2 × 64.5 = 129.0
+
+--------------------------------------------------
+4.2 SUM AND DIFFERENCE RULE
+--------------------------------------------------
+
+  Rule: d/dx[f(x) ± g(x)] = f'(x) ± g'(x)
+
+  Example: d/dx[x² + 3x - 5] = 2x + 3
+
+--------------------------------------------------
+4.3 PRODUCT RULE
+--------------------------------------------------
+
+  Rule: d/dx[f(x)·g(x)] = f'(x)·g(x) + f(x)·g'(x)
+
+  Example: d/dx[x²·eˣ] = 2x·eˣ + x²·eˣ = eˣ(x² + 2x)
+
+  Verification:
+    At x = 2:
+    Analytical: 59.112449
+    Numerical:  59.112449
+
+--------------------------------------------------
+4.4 CHAIN RULE
+--------------------------------------------------
+
+  Rule: d/dx[f(g(x))] = f'(g(x)) · g'(x)
+
+  Example: d/dx[sin(x²)] = cos(x²) · 2x
+
+  This is crucial for neural network backpropagation!
+
+  Verification:
+    At x = 1.5:
+    d/dx[sin(x²)] = cos(x²) · 2x
+    Analytical: -1.884521
+    Numerical:  -1.884521
+
+======================================================================
+STEP 5: PARTIAL DERIVATIVES
+======================================================================
+
+--- Multivariate Functions ---
+
+  For functions of multiple variables, partial derivatives measure
+  the rate of change with respect to one variable while holding
+  others constant.
+
+  Notation: ∂f/∂x (partial derivative of f with respect to x)
+
+--- Example: Performance Function ---
+
+  Let P(s, e) = 2s² + 3e² - se + 10
+  where s = study hours, e = experience level
+
+  Partial derivatives:
+    ∂P/∂s = 4s - e    (rate of change with respect to study hours)
+    ∂P/∂e = 6e - s    (rate of change with respect to experience)
+
+  Evaluation at (s=3, e=2):
+    P(3, 2) = 34
+    ∂P/∂s at (3, 2) = 4(3) - 2 = 10
+    ∂P/∂e at (3, 2) = 6(2) - 3 = 9
+
+--- The Gradient ---
+
+  The gradient is a vector of all partial derivatives:
+    ∇P = [∂P/∂s, ∂P/∂e]ᵀ
+
+    ∇P at (3, 2) = [10, 9]ᵀ
+
+  The gradient points in the direction of steepest increase.
+
+======================================================================
+STEP 6: INTEGRALS - ACCUMULATION
+======================================================================
+
+--- Definite Integral ---
+
+  The definite integral represents the signed area under a curve:
+
+         b
+        ∫ f(x) dx = F(b) - F(a)
+         a
+
+  where F'(x) = f(x) (F is the antiderivative of f)
+
+--- Fundamental Theorem of Calculus ---
+
+  Part 1: If F(x) = ∫ₐˣ f(t) dt, then F'(x) = f(x)
+  Part 2: ∫ₐᵇ f(x) dx = F(b) - F(a)
+
+--- Example: Integrating the Grade Distribution ---
+
+  f(x) = 0.001x² - 0.1x + 10
+  F(x) = ∫ f(x) dx = (0.001/3)x³ - (0.1/2)x² + 10x + C
+       = 0.000333x³ - 0.05x² + 10x + C
+
+  Calculate ∫₄₀⁷⁰ f(x) dx:
+
+    Analytical: F(70) - F(40)
+              = 569.3333 - 341.3333
+              = 228.0000
+
+    Numerical (scipy.integrate.quad): 228.0000
+    Numerical error estimate: 2.53e-12
+
+--- Application: Expected Value ---
+
+  For a probability density function (PDF), the expected value is:
+    E[X] = ∫ x · f(x) dx
+
+======================================================================
+STEP 7: OPTIMISATION - FINDING EXTREMA
+======================================================================
+
+--- Critical Points ---
+
+  A critical point occurs where f'(x) = 0 or f'(x) is undefined.
+
+  To classify critical points:
+    - f''(x) > 0: Local minimum (concave up)
+    - f''(x) < 0: Local maximum (concave down)
+    - f''(x) = 0: Inconclusive (use higher-order tests)
+
+--- Example: Finding Minimum of Cost Function ---
+
+  Let C(x) = x² - 6x + 15  (cost as function of some parameter)
+  C'(x) = 2x - 6
+  C''(x) = 2
+
+  Setting C'(x) = 0:
+    2x - 6 = 0
+    x = 3
+
+  Since C''(3) = 2 > 0, x = 3 is a local minimum.
+
+  Verification:
+    C(3) = 6
+    C'(3) = 0 (should be 0)
+    C''(3) = 2 > 0 (minimum)
+
+======================================================================
+STEP 8: GRADIENT DESCENT ALGORITHM
+======================================================================
+
+--- Algorithm Description ---
+
+  Gradient descent is an iterative optimisation algorithm:
+
+    θₜ₊₁ = θₜ - α · ∇J(θₜ)
+
+  where:
+    θ = parameters to optimise
+    α = learning rate (step size)
+    ∇J = gradient of the cost function
+
+--- Implementing Gradient Descent ---
+
+  Objective Function: f(x) = (x - 3)² + 2
+  True Minimum: x = 3, f(3) = 2
+
+  Gradient Descent Parameters:
+    Initial x: 10
+    Learning Rate (α): 0.1
+    Iterations: 50
+
+  Iteration History:
+  --------------------------------------------------
+   Iteration             x          f(x)      Gradient
+  --------------------------------------------------
+           0     10.000000     51.000000     14.000000
+           1      8.600000     33.360000     11.200000
+           2      7.480000     22.070400      8.960000
+           3      6.584000     14.845056      7.168000
+           4      5.867200     10.220836      5.734400
+           5      5.293760      7.261335      4.587520
+          10      3.751619      2.564932      1.503239
+          20      3.080705      2.006513      0.161409
+          30      3.008666      2.000075      0.017331
+          40      3.000930      2.000001      0.001861
+          50      3.000100      2.000000      0.000200
+
+  Final Result:
+    x* = 3.000100 (true minimum: 3)
+    f(x*) = 2.000000 (true minimum: 2)
+    Error: |x* - 3| = 0.000100
+
+======================================================================
+STEP 9: LEARNING RATE ANALYSIS
+======================================================================
+
+--- Effect of Learning Rate ---
+
+  The learning rate α significantly affects convergence:
+    - Too small: Slow convergence
+    - Too large: May overshoot or diverge
+    - Just right: Fast, stable convergence
+
+  Comparing Different Learning Rates:
+  ------------------------------------------------------------
+    α = 0.01: x* =     5.549188, f(x*) =     8.498358 [Slow convergence]
+    α = 0.1: x* =     3.000100, f(x*) =     2.000000 [Converged]
+    α = 0.5: x* =     3.000000, f(x*) =     2.000000 [Converged]
+    α = 0.9: x* =     3.000100, f(x*) =     2.000000 [Converged]
+    α = 1.0: x* =    10.000000, f(x*) =    51.000000 [Slow convergence]
+
+======================================================================
+STEP 10: MULTIVARIATE GRADIENT DESCENT
+======================================================================
+
+--- Extending to Multiple Variables ---
+
+  For f(x, y), the gradient is:
+    ∇f = [∂f/∂x, ∂f/∂y]ᵀ
+
+  Update rule:
+    [x, y]ₜ₊₁ = [x, y]ₜ - α · ∇f([x, y]ₜ)
+
+  Rosenbrock Function: f(x,y) = (1-x)² + 100(y-x²)²
+  Global Minimum: (x, y) = (1, 1), f(1,1) = 0
+
+  Initial Point: [-1, 1]
+  Learning Rate: 0.001
+  Iterations: 10000
+
+  Final Result:
+    (x*, y*) = (0.992482, 0.984990)
+    f(x*, y*) = 0.000057
+
+======================================================================
+STEP 11: VISUALISATION
+======================================================================
+
+Visualisation saved: calculus_optimisation_marking_matrix.png
+
+======================================================================
+STEP 12: SUMMARY
+======================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│              CALCULUS AND OPTIMISATION SUMMARY                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  DERIVATIVES                                                         │
+│    Power Rule: d/dx[xⁿ] = n·xⁿ⁻¹                                    │
+│    Chain Rule: d/dx[f(g(x))] = f'(g(x))·g'(x)                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  INTEGRALS                                                           │
+│    ∫₄₀⁷⁰ f(x)dx =   228.0000                                       │
+├─────────────────────────────────────────────────────────────────────┤
+│  GRADIENT DESCENT                                                    │
+│    Update: θₜ₊₁ = θₜ - α·∇J(θₜ)                                     │
+│    Best Learning Rate: α = 0.1                                      │
+│    Final x* =   3.000100 (target: 3.0)                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+--- Dataset Reference ---
+  Arden University (2024) COM7023 Mathematics for Data Science
+  Marking Matrix. Arden University.
+
+--- Further Reading ---
+  Stewart, J. (2015) Calculus: Early Transcendentals. 8th edn.
+  Cengage Learning.
+
+======================================================================
+END OF CALCULUS AND OPTIMISATION ANALYSIS
+Student: Farid Negahbnai (24154844)
+======================================================================
