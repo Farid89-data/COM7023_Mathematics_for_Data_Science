@@ -241,8 +241,8 @@ Each script generates:
 * **Results:** Saved to `outputs/results/` directory
 
 
-📊 Mathematical Topics
-#	Topic	Description	Key Concepts
+## 📊 Mathematical Topics
+####	Topic	Description	Key Concepts
 01.	Data Loading & Exploration	Initial data analysis and structure understanding	pandas.read_csv(), DataFrame.info(), DataFrame.describe()
 02.	Descriptive Statistics	Measures of central tendency and dispersion	Mean, median, mode, variance, standard deviation
 03.	Normalisation & Standardisation	Data transformation techniques	Min-max scaling, Z-score normalisation
