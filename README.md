@@ -211,8 +211,7 @@ pip install -r requirements.txt
 ```
 ### Step 4: Add Datasets
 Place the following files in the `datasets/` directory:
-
-`COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv`
+https://www.kaggle.com/datasets/frd894563524452/ardenuni-com7023-math4ds-markingmatrix: `COM7023_Mathematics_for_Data_Science_Marking_Matrix.csv`
 `FRA_InputData_25.11.2024.xlsx` (download from twinbirths.org)
 
 ### Step 5: Run Scripts
