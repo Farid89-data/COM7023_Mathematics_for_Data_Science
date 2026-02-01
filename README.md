@@ -20,6 +20,14 @@ License
 
 </div>
 
+## Abstract
+This report delivers a rigorous mathematical analysis of two contrasting datasets: the COM7023 Marking Matrix (Arden University, 2024) (qualitative rubric with textual descriptors across nine grade bands and four learning outcomes) and French triplet birth statistics (1858-2023) from the Human Multiple Births Database (Human Multiple Births Database, 2024; Torres, Caporali and Pison, 2023).
+Eight mathematical domains are systematically explored: data loading, descriptive statistics (Freedman, 2009), normalisation, probability distributions (Wasserman, 2004), hypothesis testing (Freedman, 2009; Wasserman, 2004), linear algebra (Strang, 2016), correlation/regression (Freedman, 2009), and calculus-based optimisation (Stewart, 2015). Key findings reveal triplet births exhibit a quadratic temporal pattern (R² = 0.719) peaking around 1999, reflecting fertility treatment adoption and subsequent regulation (Torres, Caporali and Pison, 2023). The marking matrix demonstrates strong inter-correlations between adjacent grade bands (r > 0.95) with notable negative correlation between the highest band and others (r ≈ -0.64) (Arden University, 2024).
+
+## Keywords
+Descriptive Statistics, Probability Distributions, Poisson Distribution, Hypothesis Testing, Linear Algebra, Eigenvalue Decomposition, Correlation Analysis, Regression Modelling, Normalisation, Standardisation, Gradient Descent, Optimisation, Data Science, Statistical Inference, Time Series Analysis
+
+
 ## 📋 Overview
 This repository contains the complete mathematical analysis portfolio for the **COM7023 Mathematics for Data Science** module at Arden University. The portfolio demonstrates advanced understanding of mathematical concepts and their practical application in real-world data science contexts.
 
