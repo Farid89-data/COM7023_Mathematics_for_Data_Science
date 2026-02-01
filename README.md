@@ -352,7 +352,7 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software...
 ```
 
-## 👤 Author
+## 👨‍💻 Author
 **Farid Negahbnai**
    * 🎓 Student ID: 24154844
    * 🏫 Arden University
