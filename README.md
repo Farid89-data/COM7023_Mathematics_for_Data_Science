@@ -5,7 +5,6 @@
 <div align="center">
 
 
-
 Python
 Pandas
 NumPy
