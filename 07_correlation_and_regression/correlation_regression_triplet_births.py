@@ -17,6 +17,7 @@ This script applies correlation and regression analysis to the triplet births
 dataset. We explore temporal trends, build predictive models, and assess
 model quality using various diagnostic measures.
 
+.
 MATHEMATICAL CONCEPTS:
 - Time series correlation
 - Simple and polynomial regression
