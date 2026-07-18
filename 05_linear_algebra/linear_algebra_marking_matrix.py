@@ -11,7 +11,7 @@ Student Name:       Farid Negahbnai
 Tutor Name:         Ali Vaisifard
 University:         Arden University
 
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 DESCRIPTION:
 This script demonstrates linear algebra concepts using the marking matrix
 dataset. We construct matrices from the data and perform fundamental matrix
