@@ -4,7 +4,7 @@
 
 Hypothesis testing is a formal statistical procedure for making decisions based on data. It provides a framework for determining whether observed results are statistically significant or could have occurred by chance.
 
-## Mathematical Concepts
+## Mathematical Concepts:
 
 ### The Hypothesis Testing Framework
 
