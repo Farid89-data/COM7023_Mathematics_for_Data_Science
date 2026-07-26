@@ -9,7 +9,7 @@ Assignment Title:   Maths for Data Science
 Student Number:     24154844
 Student Name:       Farid Negahbnai
 Tutor Name:         Ali Vaisifard
-University:         Arden University
+University:         Arden Uni
 
 --------------------------------------------------------------------------------
 DESCRIPTION:
