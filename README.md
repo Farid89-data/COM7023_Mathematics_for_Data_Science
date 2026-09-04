@@ -3,7 +3,6 @@
 # COM7023 Mathematics for Data Science
 
 <div align="center">
-.....
 
 Python
 Pandas
