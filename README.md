@@ -9,7 +9,7 @@ Pandas
 NumPy
 Matplotlib
 License
-
+.....
 A comprehensive mathematical analysis portfolio for data science applications
 
 Overview •
