@@ -10,7 +10,7 @@ Student Number:     24154844
 Student Name:       Farid Negahbnai
 Tutor Name:         Ali Vaisifard
 University:         Arden University
-
+....
 -----------------------------------------------------------------------------
 DESCRIPTION:
 This script demonstrates linear algebra concepts using the marking matrix
